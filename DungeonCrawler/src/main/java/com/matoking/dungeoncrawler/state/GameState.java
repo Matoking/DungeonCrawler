@@ -12,10 +12,10 @@ public class GameState {
     }
 
     public GameMap getGameMap() {
-        return gameMap;
+        return this.gameMap;
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 }

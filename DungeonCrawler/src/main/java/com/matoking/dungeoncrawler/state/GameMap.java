@@ -1,6 +1,7 @@
 package com.matoking.dungeoncrawler.state;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Contains the map of the game as well as any entities inside, apart from the player
@@ -28,22 +29,33 @@ public class GameMap {
                 this.tiles[x][y] = new Tile(x, y, TileType.EMPTY);
             }
         }
-        
-        for (int x=2; x < 8; x++) {
-            for (int y=2; y < 8; y++) {
-                this.setTile(x, y, TileType.WALL);
-            }
-        }
-        
-        for (int x=3; x < 7; x++) {
-            for (int y=3; y < 7; y++) {
-                this.setTile(x, y, TileType.FLOOR);
-            }
-        }
     }
     
     public GameMap() {
         this(MAP_DEFAULT_WIDTH, MAP_DEFAULT_HEIGHT);
+    }
+    
+    /**
+     * Generate the map
+     * This will probably be offloaded to a different class but for now do some
+     * placeholder testing
+     * 
+     */
+    public void generateMap() {
+        Random random = new Random();
+        
+        int length = random.nextInt(25) + 20;
+        for (int x=2; x < 2 + length; x++) {
+            for (int y=2; y < 2 + length; y++) {
+                this.setTile(x, y, TileType.WALL);
+            }
+        }
+        
+        for (int x=3; x < 1 + length; x++) {
+            for (int y=3; y < 1 + length; y++) {
+                this.setTile(x, y, TileType.FLOOR);
+            }
+        }
     }
     
     /**

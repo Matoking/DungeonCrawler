@@ -46,7 +46,7 @@ public class Tile {
                 return "floor";
                 
             default:
-                return "n/a";
+                return "empty";
         }
     }
 

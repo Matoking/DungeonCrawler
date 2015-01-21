@@ -72,4 +72,16 @@ public class GameMapTest {
         
         assertEquals(false, this.gameMap.isTileBlocked(5, 5));
     }
+    
+    @Test
+    public void testWallTileImageNames() {
+        this.gameMap.setTile(5, 5, TileType.EMPTY);
+        assertEquals("empty", this.gameMap.getTile(5, 5).getImageName());
+        
+        this.gameMap.setTile(5, 5, TileType.WALL);
+        assertEquals("wall", this.gameMap.getTile(5, 5).getImageName());
+        
+        this.gameMap.setTile(5, 5, TileType.FLOOR);
+        assertEquals("floor", this.gameMap.getTile(5, 5).getImageName());
+    }
 }

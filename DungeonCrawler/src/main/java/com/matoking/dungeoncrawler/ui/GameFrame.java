@@ -4,10 +4,11 @@ import com.matoking.dungeoncrawler.state.GameState;
 import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
-    private MapPanel mapPanel;
     private GameState gameState;
     
+    private MapPanel mapPanel;
     private SpriteCache spriteCache;
+    private Controls controls;
     
     public GameFrame(GameState gameState) {
         this.setTitle("Dungeon Crawler");
@@ -16,11 +17,13 @@ public class GameFrame extends JFrame {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        this.gameState = new GameState();
+        this.gameState = gameState;
         
         this.mapPanel = new MapPanel(this.gameState, this, 0, 0, 25, 25);
-        
         this.spriteCache = new SpriteCache();
+        this.controls = new Controls(this);
+        
+        this.addKeyListener(this.controls);
         
         this.add(this.mapPanel);
     }

@@ -24,8 +24,7 @@ public class SpriteCache {
      * as a BufferedImage
      * 
      * @param imageName     Name of the image to load
-     * @return              The loaded image as BufferedImage
-     * @throws Exception    FileNotFoundException is thrown if the image file is not found
+     * @return              The loaded image as BufferedImage, null if the image is not found
      */
     public BufferedImage getImage(String imageName) {
         if (this.sprites.containsKey(imageName)) {

@@ -4,6 +4,7 @@ import com.matoking.dungeoncrawler.state.GameMap;
 import com.matoking.dungeoncrawler.state.GameState;
 import com.matoking.dungeoncrawler.state.Player;
 import com.matoking.dungeoncrawler.state.Tile;
+import com.matoking.dungeoncrawler.state.TileType;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -39,6 +40,14 @@ public class MapPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
+        this.render(g);
+    }
+    
+    /**
+     * Renders the map screen
+     * Should be called when the player moves
+     */
+    public void render(Graphics g) {
         this.renderTiles(g);
     }
     
@@ -78,14 +87,14 @@ public class MapPanel extends JPanel {
         
         Tile tile = gameMap.getTile(realX, realY);
         
-        if (tile == null) {
-            return;
-        }
-        
-        // Render the tile image
-        BufferedImage tileImage = spriteCache.getImage(tile.getImageName());
+        if (tile != null) {
+            // Render the tile image
+            if (!tile.getImageName().equals("empty")) {
+                BufferedImage tileImage = spriteCache.getImage(tile.getImageName());
 
-        g.drawImage(tileImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
+                g.drawImage(tileImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
+            }
+        }
         
         // Render the player if he is standing on this tile
         if (realX == player.getX() && realY == player.getY()) {
