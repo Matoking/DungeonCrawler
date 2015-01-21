@@ -10,4 +10,12 @@ public class GameState {
         
         this.player = new Player(this.gameMap, 5, 5);
     }
+
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

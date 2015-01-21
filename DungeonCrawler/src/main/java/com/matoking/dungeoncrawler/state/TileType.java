@@ -5,5 +5,5 @@ package com.matoking.dungeoncrawler.state;
  * @author matoking
  */
 public enum TileType {
-    EMPTY, WALL;
+    EMPTY, WALL, FLOOR;
 }

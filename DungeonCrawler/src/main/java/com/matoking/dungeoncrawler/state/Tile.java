@@ -36,6 +36,19 @@ public class Tile {
     public TileType getType() {
         return type;
     }
+    
+    public String getImageName() {
+        switch (this.getType()) {
+            case WALL:
+                return "wall";
+                
+            case FLOOR:
+                return "floor";
+                
+            default:
+                return "n/a";
+        }
+    }
 
     public void setType(TileType type) {
         this.type = type;

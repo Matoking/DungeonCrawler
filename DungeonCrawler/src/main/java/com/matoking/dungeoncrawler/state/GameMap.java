@@ -28,6 +28,18 @@ public class GameMap {
                 this.tiles[x][y] = new Tile(x, y, TileType.EMPTY);
             }
         }
+        
+        for (int x=2; x < 8; x++) {
+            for (int y=2; y < 8; y++) {
+                this.setTile(x, y, TileType.WALL);
+            }
+        }
+        
+        for (int x=3; x < 7; x++) {
+            for (int y=3; y < 7; y++) {
+                this.setTile(x, y, TileType.FLOOR);
+            }
+        }
     }
     
     public GameMap() {

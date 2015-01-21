@@ -11,7 +11,9 @@ public class DungeonCrawler {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                GameFrame gameFrame = new GameFrame();
+                GameState gameState = new GameState();
+                
+                GameFrame gameFrame = new GameFrame(gameState);
                 gameFrame.setVisible(true);
             }
         });
