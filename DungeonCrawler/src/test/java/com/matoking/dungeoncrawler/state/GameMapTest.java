@@ -84,4 +84,11 @@ public class GameMapTest {
         this.gameMap.setTile(5, 5, TileType.FLOOR);
         assertEquals("floor", this.gameMap.getTile(5, 5).getImageName());
     }
+    
+    @Test
+    public void testNullReturnedOnInvalidTile() {
+        assertEquals(null, this.gameMap.getTile(-1,-1));
+        
+        assertEquals(null, this.gameMap.getTile(this.gameMap.getWidth(), this.gameMap.getHeight()));
+    }
 }
