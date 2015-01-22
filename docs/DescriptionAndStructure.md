@@ -9,3 +9,12 @@ FUNCTIONS
 * Controlling the player character with arrow keys
 * Rendering the current state of the game
   - player is displayed in the middle of the screen
+* Enemies
+  - wander around aimlessly when idle
+  - if player comes near, enemy will start chasing the player
+* Keys
+  - player picks up keys placed around the map by walking over them
+  - the game is won when all keys have been picked up
+* Various other items(?)
+  - swords that improve player's damage
+  - apples that restore player's health
