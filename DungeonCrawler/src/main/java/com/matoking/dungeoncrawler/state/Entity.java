@@ -1,32 +1,36 @@
 package com.matoking.dungeoncrawler.state;
 
 /**
- * Base entity class
+ * Entity is an object that can be seen on the map and can be interacted with
  * 
  * @author matoking
  */
-public class Entity {
-    private int x;
-    private int y;
+public interface Entity {
+    public int getX();
+    public int getY();
     
-    public Entity(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
+    /**
+     * Can other entities/player move on top of this entity?
+     * 
+     * @return Is this entity an obstacle
+     */
+    public boolean isObstacle();
+    
+    /**
+     * Called when the player has moved
+     */
+    public void step();
+    
+    /**
+     * Called when the player touches the entity, either by moving on top of it or
+     * trying to move on top of it
+     */
+    public void onPlayerTouch();
+    
+    /**
+     * Get the image name used to render this image
+     * 
+     * @return Image name as a string
+     */
+    public String getImageName();
 }

@@ -11,11 +11,16 @@ public class Player {
     private int x;
     private int y;
     
+    // Amount of keys the player has
+    private int keys;
+    
     public Player(GameMap gameMap, int x, int y) {
         this.gameMap = gameMap;
         
         this.x = x;
         this.y = y;
+        
+        this.keys = 0;
     }
     
     /**
@@ -56,5 +61,13 @@ public class Player {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getKeys() {
+        return keys;
+    }
+    
+    public void increaseKeys(int amount) {
+        this.keys += amount;
     }
 }

@@ -1,14 +1,15 @@
 package com.matoking.dungeoncrawler.ui;
 
+import com.matoking.dungeoncrawler.state.Entity;
 import com.matoking.dungeoncrawler.state.GameMap;
 import com.matoking.dungeoncrawler.state.GameState;
 import com.matoking.dungeoncrawler.state.Player;
 import com.matoking.dungeoncrawler.state.Tile;
-import com.matoking.dungeoncrawler.state.TileType;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -49,6 +50,7 @@ public class MapPanel extends JPanel {
      */
     public void render(Graphics g) {
         this.renderTiles(g);
+        this.renderEntities(g);
     }
     
     /**
@@ -99,6 +101,31 @@ public class MapPanel extends JPanel {
         // Render the player if he is standing on this tile
         if (realX == player.getX() && realY == player.getY()) {
             g.drawImage(spriteCache.getImage("player"), spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
+        }
+    }
+    
+    /**
+     * Render entities in the view 
+     */
+    public void renderEntities(Graphics g) {
+        ArrayList<Entity> entities = this.gameState.getGameMap().getEntities();
+        
+        Player player = this.gameState.getPlayer();
+        SpriteCache spriteCache = this.gameFrame.getSpriteCache();
+        
+        int offsetX = player.getX() - (this.getRows() / 2);
+        int offsetY = player.getY() - (this.getColumns() / 2);
+        
+        for (Entity entity : entities) {
+            // Render only visible entities
+            if (entity.getX() >= offsetX && entity.getX() <= offsetX + this.getRows() &&
+                entity.getY() >= offsetY && entity.getY() <= offsetY + this.getColumns()) {
+                BufferedImage entityImage = spriteCache.getImage(entity.getImageName());
+                
+                int spriteX = entity.getX() * TileSprite.TILE_WIDTH;
+                int spriteY = entity.getY() * TileSprite.TILE_HEIGHT;
+                
+                g.drawImage(entityImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);            }
         }
     }
     
