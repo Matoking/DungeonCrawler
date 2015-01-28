@@ -1,6 +1,7 @@
 package com.matoking.dungeoncrawler.state.entities;
 
 import com.matoking.dungeoncrawler.state.Entity;
+import com.matoking.dungeoncrawler.state.GameMessages;
 import com.matoking.dungeoncrawler.state.GameState;
 
 /**
@@ -33,7 +34,7 @@ public class Key implements Entity {
     public void onPlayerTouch() {
         this.gameState.getPlayer().increaseKeys(1);
         this.gameState.getGameMap().removeEntity(this);
-        this.gameState.getGameLog().addMessage("You picked up one of those fancy golden keys!");
+        this.gameState.getGameLog().addMessage(GameMessages.getKeyPickupMessage());
     }
 
     @Override

@@ -17,8 +17,7 @@ public class GameLog {
         
         this.messages = new ArrayList<String>();
         
-        this.messages.add("This is a test message.");
-        this.messages.add("The player did something.");
+        this.messages.add(GameMessages.getGameStartMessage());
     }
     
     /**

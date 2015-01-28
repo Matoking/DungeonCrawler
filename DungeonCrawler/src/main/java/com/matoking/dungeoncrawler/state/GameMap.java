@@ -51,19 +51,30 @@ public class GameMap {
         Random random = new Random();
         
         int length = random.nextInt(25) + 30;
-        for (int x=2; x < 2 + length; x++) {
-            for (int y=2; y < 2 + length; y++) {
+        for (int x=0; x < length; x++) {
+            for (int y=0; y < length; y++) {
                 this.setTile(x, y, TileType.WALL);
             }
         }
         
-        for (int x=3; x < 1 + length; x++) {
-            for (int y=3; y < 1 + length; y++) {
+        for (int x=1; x < length - 1; x++) {
+            for (int y=1; y < length - 1; y++) {
                 this.setTile(x, y, random.nextInt(100) < 85 ? TileType.FLOOR : TileType.WALL);
             }
         }
         
         this.setTile(5, 5, TileType.FLOOR);
+        
+        int generatedKeys = 0;
+        while (generatedKeys < 5) {
+            int x = random.nextInt(length);
+            int y = random.nextInt(length);
+            
+            if (!this.isTileBlocked(x, y)) {
+                this.addEntity(new Key(this.gameState, x, y));
+                generatedKeys++;
+            }
+        }
     }
     
     /**

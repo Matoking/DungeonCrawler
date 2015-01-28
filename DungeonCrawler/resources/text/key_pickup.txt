@@ -1,0 +1,5 @@
+You picked up a golden key!
+You are now in possession of a golden key!
+You found a shiny golden key!
+You now hold a fancy golden key!
+You now have a golden key!

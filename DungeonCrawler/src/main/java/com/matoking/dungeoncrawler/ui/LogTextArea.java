@@ -29,6 +29,7 @@ public class LogTextArea extends JPanel {
         this.setLocation(x, y);
         this.setSize(new Dimension(width, height));
         
+        // Format the text area
         this.textArea = new JTextArea(TEXT_ROWS, TEXT_COLUMNS);
         this.textArea.setLocation(x, y);
         this.textArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
@@ -41,6 +42,8 @@ public class LogTextArea extends JPanel {
         this.textArea.setForeground(Color.WHITE);
         
         this.add(this.textArea);
+        
+        this.update();
     }
     
     /**

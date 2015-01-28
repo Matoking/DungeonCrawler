@@ -14,9 +14,6 @@ public class GameState {
         this.gameLog = new GameLog(this);
         
         this.player = new Player(this.gameMap, 5, 5);
-        
-        // Test entities and stuff here
-        this.gameMap.addEntity(new Key(this, 7, 7));
     }
     
     /**
