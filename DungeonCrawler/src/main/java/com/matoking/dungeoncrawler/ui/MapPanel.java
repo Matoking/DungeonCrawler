@@ -26,11 +26,13 @@ public class MapPanel extends JPanel {
         this.gameState = gameState;
         this.gameFrame = gameFrame;
         
+        this.setFocusable(false);
+        
         this.rows = rows;
         this.columns = columns;
         
-        this.setPreferredSize(new Dimension(TileSprite.TILE_WIDTH*rows,
-                                            TileSprite.TILE_HEIGHT*columns));
+        this.setSize(new Dimension(TileSprite.TILE_WIDTH*rows,
+                                   TileSprite.TILE_HEIGHT*columns));
         
         this.setLocation(x, y);
         
@@ -51,6 +53,7 @@ public class MapPanel extends JPanel {
     public void render(Graphics g) {
         this.renderTiles(g);
         this.renderEntities(g);
+        this.renderPlayer(g);
     }
     
     /**
@@ -97,11 +100,6 @@ public class MapPanel extends JPanel {
                 g.drawImage(tileImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
             }
         }
-        
-        // Render the player if he is standing on this tile
-        if (realX == player.getX() && realY == player.getY()) {
-            g.drawImage(spriteCache.getImage("player"), spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
-        }
     }
     
     /**
@@ -122,11 +120,21 @@ public class MapPanel extends JPanel {
                 entity.getY() >= offsetY && entity.getY() <= offsetY + this.getColumns()) {
                 BufferedImage entityImage = spriteCache.getImage(entity.getImageName());
                 
-                int spriteX = entity.getX() * TileSprite.TILE_WIDTH;
-                int spriteY = entity.getY() * TileSprite.TILE_HEIGHT;
+                int spriteX = (entity.getX() - offsetX) * TileSprite.TILE_WIDTH;
+                int spriteY = (entity.getY() - offsetY) * TileSprite.TILE_HEIGHT;
                 
-                g.drawImage(entityImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);            }
+                g.drawImage(entityImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);            
+            }
         }
+    }
+    
+    public void renderPlayer(Graphics g) {
+        SpriteCache spriteCache = this.gameFrame.getSpriteCache();
+        
+        int spriteX = (this.getRows() / 2) * TileSprite.TILE_WIDTH;
+        int spriteY = (this.getColumns() / 2) * TileSprite.TILE_WIDTH;
+        
+        g.drawImage(spriteCache.getImage("player"), spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
     }
     
     public int getRows() {

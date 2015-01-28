@@ -27,29 +27,27 @@ public class Controls implements KeyListener {
     @Override
     public void keyPressed(KeyEvent ke) {
         GameState gameState = this.gameFrame.getGameState();
-        Player player = gameState.getPlayer();
         
         switch (ke.getKeyCode()) {
             case KeyEvent.VK_UP:
-                player.move(Direction.UP);
+                gameState.performMove(Direction.UP);
                 break;
                 
             case KeyEvent.VK_RIGHT:
-                player.move(Direction.RIGHT);
+                gameState.performMove(Direction.RIGHT);
                 break;
                 
             case KeyEvent.VK_DOWN:
-                player.move(Direction.DOWN);
+                gameState.performMove(Direction.DOWN);
                 break;
                 
             case KeyEvent.VK_LEFT:
-                player.move(Direction.LEFT);
+                gameState.performMove(Direction.LEFT);
                 break;
         }
         
-        System.out.println("Moved");
-        
         this.gameFrame.repaint();
+        this.gameFrame.getLogTextArea().update();
     }
     
 }

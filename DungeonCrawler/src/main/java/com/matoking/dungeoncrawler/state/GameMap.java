@@ -1,5 +1,6 @@
 package com.matoking.dungeoncrawler.state;
 
+import com.matoking.dungeoncrawler.state.entities.Key;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,15 +13,19 @@ public class GameMap {
     public static int MAP_DEFAULT_WIDTH = 64;
     public static int MAP_DEFAULT_HEIGHT = 64;
     
+    private GameState gameState;
+    
     private int width;
     private int height;
     
     private Tile[][] tiles;
     private ArrayList<Entity> entities;
     
-    public GameMap(int width, int height) {
+    public GameMap(GameState gameState, int width, int height) {
         this.width = width;
         this.height = height;
+        
+        this.gameState = gameState;
         
         this.tiles = new Tile[width][height];
         this.entities = new ArrayList<Entity>();
@@ -32,8 +37,8 @@ public class GameMap {
         }
     }
     
-    public GameMap() {
-        this(MAP_DEFAULT_WIDTH, MAP_DEFAULT_HEIGHT);
+    public GameMap(GameState gameState) {
+        this(gameState, MAP_DEFAULT_WIDTH, MAP_DEFAULT_HEIGHT);
     }
     
     /**
@@ -114,6 +119,25 @@ public class GameMap {
     }
 
     public ArrayList<Entity> getEntities() {
+        return entities;
+    }
+    
+    /**
+     * Get all entities that occupy the selected coordinate
+     * 
+     * @param x X-coordinate
+     * @param y Y-coordinate
+     * @return ArrayList<Entity> with matching entities
+     */
+    public ArrayList<Entity> getEntitiesAt(int x, int y) {
+        ArrayList<Entity> entities = new ArrayList<Entity>();
+        
+        for (Entity entity : this.entities) {
+            if (entity.getX() == x && entity.getY() == y) {
+                entities.add(entity);
+            }
+        }
+        
         return entities;
     }
 }

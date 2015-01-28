@@ -28,23 +28,25 @@ public class Player {
      * 
      * @param direction 
      */
-    public void move(Direction direction) {
+    public boolean move(Direction direction) {
         Coordinate newCoordinates = Coordinate.getNewCoordinates(direction, x, y);
         
         int newX = newCoordinates.getX();
         int newY = newCoordinates.getY();
         
         if (this.gameMap.isTileBlocked(newX, newY)) {
-            return;
+            return false;
         }
         
         if (newX < 0 || newX > this.gameMap.getWidth()-1 ||
             newY < 0 || newY > this.gameMap.getHeight()-1) {
-            return;
+            return false;
         }
         
         this.x = newX;
         this.y = newY;
+        
+        return true;
     }
 
     public int getX() {

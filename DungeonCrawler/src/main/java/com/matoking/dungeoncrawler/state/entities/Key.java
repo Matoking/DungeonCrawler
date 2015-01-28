@@ -1,6 +1,7 @@
 package com.matoking.dungeoncrawler.state.entities;
 
 import com.matoking.dungeoncrawler.state.Entity;
+import com.matoking.dungeoncrawler.state.GameState;
 
 /**
  *
@@ -10,7 +11,11 @@ public class Key implements Entity {
     private int x;
     private int y;
     
-    public Key(int x, int y) {
+    private GameState gameState;
+    
+    public Key(GameState gameState, int x, int y) {
+        this.gameState = gameState;
+        
         this.x = x;
         this.y = y;
     }
@@ -26,7 +31,9 @@ public class Key implements Entity {
     // When player touches the button, remove the key entity and increase player's key count
     @Override
     public void onPlayerTouch() {
-        
+        this.gameState.getPlayer().increaseKeys(1);
+        this.gameState.getGameMap().removeEntity(this);
+        this.gameState.getGameLog().addMessage("You picked up one of those fancy golden keys!");
     }
 
     @Override
