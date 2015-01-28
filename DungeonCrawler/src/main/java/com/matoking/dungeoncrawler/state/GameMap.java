@@ -45,7 +45,7 @@ public class GameMap {
     public void generateMap() {
         Random random = new Random();
         
-        int length = random.nextInt(25) + 20;
+        int length = random.nextInt(25) + 30;
         for (int x=2; x < 2 + length; x++) {
             for (int y=2; y < 2 + length; y++) {
                 this.setTile(x, y, TileType.WALL);
@@ -54,9 +54,11 @@ public class GameMap {
         
         for (int x=3; x < 1 + length; x++) {
             for (int y=3; y < 1 + length; y++) {
-                this.setTile(x, y, TileType.FLOOR);
+                this.setTile(x, y, random.nextInt(100) < 85 ? TileType.FLOOR : TileType.WALL);
             }
         }
+        
+        this.setTile(5, 5, TileType.FLOOR);
     }
     
     /**
