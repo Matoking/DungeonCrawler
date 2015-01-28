@@ -23,6 +23,7 @@ public class GameMap {
         this.height = height;
         
         this.tiles = new Tile[width][height];
+        this.entities = new ArrayList<Entity>();
         
         for (int x=0; x < width; x++) {
             for (int y=0; y < height; y++) {
@@ -100,5 +101,17 @@ public class GameMap {
 
     public int getHeight() {
         return height;
+    }
+    
+    public void addEntity(Entity entity) {
+        this.entities.add(entity);
+    }
+    
+    public void removeEntity(Entity entity) {
+        this.entities.remove(entity);
+    }
+
+    public ArrayList<Entity> getEntities() {
+        return entities;
     }
 }
