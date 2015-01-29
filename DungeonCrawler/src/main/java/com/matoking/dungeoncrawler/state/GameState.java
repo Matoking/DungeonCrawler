@@ -14,6 +14,23 @@ public class GameState {
         this.gameLog = new GameLog(this);
         
         this.player = new Player(this.gameMap, 5, 5);
+        
+        this.startGame();
+    }
+    
+    /**
+     * Starts a new game
+     */
+    public void startGame() {
+        this.gameMap = null;
+        this.gameMap = new GameMap(this);
+        
+        this.player = null;
+        this.player = new Player(this.gameMap, 5, 5);
+        
+        this.gameLog.clearMessages();
+        
+        this.gameLog.addMessage(GameMessages.getGameStartMessage());
     }
     
     /**

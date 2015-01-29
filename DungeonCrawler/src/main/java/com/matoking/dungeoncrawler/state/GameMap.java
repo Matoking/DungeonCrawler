@@ -66,7 +66,7 @@ public class GameMap {
         this.setTile(5, 5, TileType.FLOOR);
         
         int generatedKeys = 0;
-        while (generatedKeys < 5) {
+        while (generatedKeys < 1000) {
             int x = random.nextInt(length);
             int y = random.nextInt(length);
             

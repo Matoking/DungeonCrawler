@@ -16,8 +16,6 @@ public class GameLog {
         this.gameState = gameState;
         
         this.messages = new ArrayList<String>();
-        
-        this.messages.add(GameMessages.getGameStartMessage());
     }
     
     /**

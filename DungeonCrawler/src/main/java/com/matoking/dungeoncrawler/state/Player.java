@@ -38,11 +38,6 @@ public class Player {
             return false;
         }
         
-        if (newX < 0 || newX > this.gameMap.getWidth()-1 ||
-            newY < 0 || newY > this.gameMap.getHeight()-1) {
-            return false;
-        }
-        
         this.x = newX;
         this.y = newY;
         

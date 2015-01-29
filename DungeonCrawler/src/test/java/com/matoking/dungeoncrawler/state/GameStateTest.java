@@ -5,6 +5,7 @@
  */
 package com.matoking.dungeoncrawler.state;
 
+import com.matoking.dungeoncrawler.state.entities.Key;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,6 +48,35 @@ public class GameStateTest {
         
         assertEquals(true, this.gameState.getPlayer().getY() >= 0 && 
                            this.gameState.getPlayer().getY() < this.gameState.getGameMap().getHeight());
+    }
+    
+    @Test
+    public void testStartGameClearsLog() {
+        this.gameState.startGame();
+        
+        this.gameState.getGameLog().addMessage("aaa");
+        this.gameState.getGameLog().addMessage("aaa");
+        this.gameState.getGameLog().addMessage("aaa");
+        
+        this.gameState.startGame();
+        
+        // When game is started, game log should have only one message
+        assertEquals(this.gameState.getGameLog().getMessages().size(), 1);
+    }
+    
+    @Test
+    public void playerInteractsWithNonSolidEntity() {
+        this.gameState.getPlayer().setX(5);
+        this.gameState.getPlayer().setY(5);
+        
+        this.gameState.getGameMap().addEntity(new Key(this.gameState, 5, 6));
+        
+        assertEquals(this.gameState.getPlayer().getKeys(), 0);
+        
+        this.gameState.performMove(Direction.DOWN);
+        
+        assertEquals(this.gameState.getGameMap().getEntities().size(), 0);
+        assertEquals(this.gameState.getPlayer().getKeys(), 1);
     }
     
 }

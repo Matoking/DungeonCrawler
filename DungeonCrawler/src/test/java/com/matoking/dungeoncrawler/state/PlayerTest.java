@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * @author matoking
  */
 public class PlayerTest {
-    
+    public GameState gameState;
     public GameMap gameMap;
     public Player player;
     
@@ -34,7 +34,8 @@ public class PlayerTest {
     
     @Before
     public void setUp() {
-        this.gameMap = new GameMap();
+        this.gameState = new GameState();
+        this.gameMap = this.gameState.getGameMap();
         
         this.player = new Player(this.gameMap, 5, 5);
     }

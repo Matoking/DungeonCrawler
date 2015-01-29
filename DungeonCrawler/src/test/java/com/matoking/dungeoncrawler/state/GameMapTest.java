@@ -5,6 +5,7 @@
  */
 package com.matoking.dungeoncrawler.state;
 
+import com.matoking.dungeoncrawler.state.entities.Key;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
  * @author matoking
  */
 public class GameMapTest {
-    
+    public GameState gameState;
     public GameMap gameMap;
     
     public GameMapTest() {
@@ -33,7 +34,8 @@ public class GameMapTest {
     
     @Before
     public void setUp() {
-        this.gameMap = new GameMap();
+        this.gameState = new GameState();
+        this.gameMap = this.gameState.getGameMap();
         
         this.gameMap.isTileBlocked(0, 0);
     }
@@ -90,5 +92,47 @@ public class GameMapTest {
         assertEquals(null, this.gameMap.getTile(-1,-1));
         
         assertEquals(null, this.gameMap.getTile(this.gameMap.getWidth(), this.gameMap.getHeight()));
+    }
+    
+    @Test
+    public void testGetEntitiesWorksCorrectly() {
+        this.gameMap.addEntity(new Key(this.gameState, 0, 5));
+        this.gameMap.addEntity(new Key(this.gameState, 2, 5));
+        this.gameMap.addEntity(new Key(this.gameState, 4, 6));
+        
+        assertEquals(this.gameMap.getEntities().size(), 3);
+    }
+    
+    @Test
+    public void testGetEntitiesAtReturnsCorrectEntities() {
+        this.gameMap.addEntity(new Key(this.gameState, 10, 10));
+        this.gameMap.addEntity(new Key(this.gameState, 10, 10));
+        
+        this.gameMap.addEntity(new Key(this.gameState, 20, 25));
+        this.gameMap.addEntity(new Key(this.gameState, 20, 25));
+        this.gameMap.addEntity(new Key(this.gameState, 20, 25));
+        this.gameMap.addEntity(new Key(this.gameState, 20, 25));
+        this.gameMap.addEntity(new Key(this.gameState, 20, 25));
+        
+        
+        assertEquals(this.gameMap.getEntitiesAt(10, 10).size(), 2);
+        assertEquals(this.gameMap.getEntitiesAt(20, 25).size(), 5);
+    }
+    
+    @Test
+    public void testRemoveEntityWorksCorrectly() {
+        Key keyOne = new Key(this.gameState, 5, 5);
+        Key keyTwo = new Key(this.gameState, 5, 5);
+        
+        this.gameMap.addEntity(keyOne);
+        this.gameMap.addEntity(keyTwo);
+        
+        assertEquals(true, this.gameMap.getEntities().contains(keyOne));
+        assertEquals(true, this.gameMap.getEntities().contains(keyTwo));
+        
+        this.gameMap.removeEntity(keyOne);
+        
+        assertEquals(false, this.gameMap.getEntities().contains(keyOne));
+        assertEquals(true, this.gameMap.getEntities().contains(keyTwo));
     }
 }

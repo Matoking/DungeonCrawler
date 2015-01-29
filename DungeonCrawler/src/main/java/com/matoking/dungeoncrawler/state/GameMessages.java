@@ -34,12 +34,19 @@ public class GameMessages {
             
             try {
                 File file = new File(String.format("%s%s", System.getProperty("user.dir"),
-                                                           String.format("/resources/text/%s.txt", list)));
+                                                           String.format("/resources/messages/%s.txt", list)));
                 
                 Scanner scanner = new Scanner(file);
                 
                 while (scanner.hasNextLine()) {
                     String message = scanner.nextLine();
+                    
+                    // If the message starts with a #,
+                    // skip it
+                    if (message.charAt(0) == '#') {
+                        continue;
+                    }
+                    
                     messages.add(message);
                 }
                 
