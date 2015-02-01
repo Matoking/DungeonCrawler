@@ -116,8 +116,8 @@ public class MapPanel extends JPanel {
         
         for (Entity entity : entities) {
             // Render only visible entities
-            if (entity.getX() >= offsetX && entity.getX() <= offsetX + this.getRows() &&
-                entity.getY() >= offsetY && entity.getY() <= offsetY + this.getColumns()) {
+            if (entity.getX() >= offsetX && entity.getX() < offsetX + this.getRows() &&
+                entity.getY() >= offsetY && entity.getY() < offsetY + this.getColumns()) {
                 BufferedImage entityImage = spriteCache.getImage(entity.getImageName());
                 
                 int spriteX = (entity.getX() - offsetX) * TileSprite.TILE_WIDTH;

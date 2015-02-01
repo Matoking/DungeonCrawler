@@ -1,1 +1,1 @@
-Welcome to Dungeon Crawler! Press arrow keys to move and interact with objects and enemies.
+Welcome to <b>Dungeon Crawler</b>! Press arrow keys to move and interact with objects and enemies.

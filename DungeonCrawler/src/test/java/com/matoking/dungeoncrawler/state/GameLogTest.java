@@ -57,6 +57,7 @@ public class GameLogTest {
             this.gameLog.addMessage(String.format("%d", i));
         }
         
+        // GameLog only holds 20 messages at most
         ArrayList<String> messages = this.gameLog.getMessages();
         
         assertEquals(messages.get(0), "5");

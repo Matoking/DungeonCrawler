@@ -45,7 +45,7 @@ public class GameMapTest {
     }
     
     @Test
-    public void testEveryTileCreatedForMap() {
+    public void testEveryTileCreatedIsEmpty() {
         for (int x=0; x < this.gameMap.getWidth(); x++) {
             for (int y=0; y < this.gameMap.getHeight(); y++) {
                 assertEquals(x, this.gameMap.getTile(x, y).getX());

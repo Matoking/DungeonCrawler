@@ -53,7 +53,7 @@ public class PlayerTest {
         
         this.gameMap.setTile(5, 3, TileType.WALL);
         
-        // Player should stay still after this
+        // Player should stay on the same spot after this
         this.player.move(Direction.UP);
         
         assertEquals(5, this.player.getX());

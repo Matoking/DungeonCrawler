@@ -7,7 +7,8 @@ public class GameFrame extends JFrame {
     private GameState gameState;
     
     private MapPanel mapPanel;
-    private LogTextArea logTextArea;
+    private LogPanel logTextArea;
+    private StatPanel statPanel;
     
     private SpriteCache spriteCache;
     private Controls controls;
@@ -23,15 +24,19 @@ public class GameFrame extends JFrame {
         
         this.gameState = gameState;
         
-        this.mapPanel = new MapPanel(this.gameState, this, 0, 0, 25, 25);
-        this.logTextArea = new LogTextArea(this.gameState, this.mapPanel.getWidth(), 0,
-                                           300, this.getHeight());
-        
         this.spriteCache = new SpriteCache();
         this.controls = new Controls(this);
         
+        this.mapPanel = new MapPanel(this.gameState, this, 0, 0, 25, 25);
+        this.logTextArea = new LogPanel(this.gameState, this.mapPanel.getWidth(), 0,
+                                           300, this.getHeight() / 2);
+        this.statPanel = new StatPanel(this.gameState, this,
+                                       this.mapPanel.getWidth(), this.logTextArea.getWidth(),
+                                       300, this.getHeight() / 2);
+        
         this.add(this.logTextArea);
         this.add(this.mapPanel);
+        this.add(this.statPanel);
         
         // Force focus only on this component to make sure
         // the key listener is always responsive
@@ -39,7 +44,7 @@ public class GameFrame extends JFrame {
         this.addKeyListener(this.controls);
     }
 
-    public LogTextArea getLogTextArea() {
+    public LogPanel getLogTextArea() {
         return logTextArea;
     }
 

@@ -7,8 +7,8 @@
 # show
 # up
 # in-game!
-You picked up a golden key!
-You are now in possession of a golden key!
-You found a shiny golden key!
-You now hold a fancy golden key!
-You now have a golden key!
+You picked up a <b style="color: yellow;">golden key</b>!
+You are now in possession of a <b style="color: yellow;">golden key</b>!
+You found a shiny <b style="color: yellow;">golden key</b>!
+You now hold a fancy <b style="color: yellow;">golden key</b>!
+You now have a <b style="color: yellow;">golden key</b>!

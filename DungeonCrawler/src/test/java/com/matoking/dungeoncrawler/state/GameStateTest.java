@@ -58,6 +58,8 @@ public class GameStateTest {
         this.gameState.getGameLog().addMessage("aaa");
         this.gameState.getGameLog().addMessage("aaa");
         
+        assertEquals(this.gameState.getGameLog().getMessages().size(), 4);
+        
         this.gameState.startGame();
         
         // When game is started, game log should have only one message
@@ -72,7 +74,9 @@ public class GameStateTest {
         this.gameState.getGameMap().addEntity(new Key(this.gameState, 5, 6));
         
         assertEquals(this.gameState.getPlayer().getKeys(), 0);
-        
+
+        // When player moves down, he should pick up the key and remove
+        // the entity representing the key
         this.gameState.performMove(Direction.DOWN);
         
         assertEquals(this.gameState.getGameMap().getEntities().size(), 0);
