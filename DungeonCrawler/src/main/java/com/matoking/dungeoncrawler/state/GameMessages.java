@@ -13,12 +13,42 @@ public class GameMessages {
     static private HashMap<String, ArrayList<String>> gameMessages = new HashMap<String, ArrayList<String>>();
     static private Random random = new Random();
     
+    /**
+     * Get a "game started" message
+     * 
+     * @return Game log message as String
+     */
     static public String getGameStartMessage() {
         return getMessageFromList("game_start");
     }
     
+    /**
+     * Get a "key picked up" message
+     * 
+     * @return Game log message as String
+     */
     static public String getKeyPickupMessage() {
         return getMessageFromList("key_pickup");
+    }
+    
+    /**
+     * Get a "player hits the skeleton" message
+     * 
+     * @param damage How much damage player dealt to the skeleton
+     * @return Game log message as String
+     */
+    static public String getPlayerHitsSkeleton(int damage) {
+        return String.format(getMessageFromList("player_hits_skeleton"), damage);
+    }
+    
+    /**
+     * Get a "player kills the skeleton" message
+     * 
+     * @param damage How much damage player dealt to the skeleton
+     * @return Game log message as String
+     */
+    static public String getPlayerKillsSkeleton(int damage) {
+        return String.format(getMessageFromList("player_kills_skeleton"), damage);
     }
     
     /**

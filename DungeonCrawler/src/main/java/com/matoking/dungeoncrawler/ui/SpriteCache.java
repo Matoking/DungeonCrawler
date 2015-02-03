@@ -1,8 +1,9 @@
 package com.matoking.dungeoncrawler.ui;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
@@ -43,5 +44,26 @@ public class SpriteCache {
             
             return this.sprites.get(imageName);
         }
+    }
+    
+    /**
+     * Loads the requested image and resizes it by the given factor
+     * 
+     * 
+     */
+    public BufferedImage getResizedImage(String imageName, int factor) {
+        BufferedImage image = this.getImage(imageName);
+        
+        if (image == null) {
+            return null;
+        }
+        
+        BufferedImage resized = new BufferedImage(image.getWidth()*factor, image.getHeight()*factor, BufferedImage.TYPE_INT_ARGB);
+        
+        Graphics g = resized.getGraphics();
+        g.drawImage(image, 0, 0, resized.getWidth(), resized.getHeight(), null);
+        g.dispose();
+        
+        return resized;
     }
 }

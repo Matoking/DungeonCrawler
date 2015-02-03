@@ -1,0 +1,6 @@
+# %1$d = damage dealt
+You slash the unnerving skeleton for <b style='color: red'>%1$d</b> damage.
+You rattle the spooky skeleton with your sword, dealing <b style='color: red'>%1$d</b> damage.
+You thrust your sword at the skeleton, dealing <b style='color: red'>%1$d</b> damage.
+You stab the skeleton for <b style='color: red'>%1$d</b> damage.
+You stab the skeleton with your sword for <b style='color: red'>%1$d</b> damage.

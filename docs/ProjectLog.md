@@ -15,3 +15,9 @@
 ===
 - Worked Entity into an interface and created Key as the first working Entity
 - Added game log, which displays randomly chosen messages about game progress (player starting the game, picking up keys, etc.)
+
+01.02.2015
+12:00-17:00
+===
+- Refactored LogTextArea (renamed LogPanel) to work with JLabel, allowing use of HTML markup
+- Added panel to display player health

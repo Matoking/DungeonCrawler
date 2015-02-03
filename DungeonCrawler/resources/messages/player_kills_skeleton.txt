@@ -1,0 +1,4 @@
+# %1$d = damage dealt
+You hit the skeleton for <b style='color: red'>%1$d</b> damage, reducing the spooky creature into a pile of bones.
+You deal a finishing blow to the animated skeleton for <b style='color: red'>%1$d</b>, unanimating it.
+You swing at the spooky skeleton for <b style='color: red'>%1$d</b> damage, sending his skull flying and his bones flailing as it disintegrates.

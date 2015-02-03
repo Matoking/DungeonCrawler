@@ -1,5 +1,9 @@
 package com.matoking.dungeoncrawler.state;
 
+/**
+ * Convenience class for retrieving new coordinates based on the direction
+ * to move to
+ */
 public class Coordinate {
     private int x;
     private int y;

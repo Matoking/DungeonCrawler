@@ -3,6 +3,9 @@ package com.matoking.dungeoncrawler.state;
 import com.matoking.dungeoncrawler.state.entities.Key;
 import java.util.ArrayList;
 
+/**
+ * The main class containing the game's state: GameMap, GameLog, Player
+ */
 public class GameState {
     private GameMap gameMap;
     private GameLog gameLog;

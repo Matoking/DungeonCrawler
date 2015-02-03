@@ -1,6 +1,7 @@
 package com.matoking.dungeoncrawler.state;
 
 import com.matoking.dungeoncrawler.state.entities.Key;
+import com.matoking.dungeoncrawler.state.entities.Skeleton;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -66,13 +67,24 @@ public class GameMap {
         this.setTile(5, 5, TileType.FLOOR);
         
         int generatedKeys = 0;
-        while (generatedKeys < 1000) {
+        while (generatedKeys < 10) {
             int x = random.nextInt(length);
             int y = random.nextInt(length);
             
-            if (!this.isTileBlocked(x, y)) {
+            if (!this.isTileBlocked(x, y) && this.getEntitiesAt(x, y).isEmpty()) {
                 this.addEntity(new Key(this.gameState, x, y));
                 generatedKeys++;
+            }
+        }
+        
+        int generatedSkeles = 0;
+        while (generatedSkeles < 10) {
+            int x = random.nextInt(length);
+            int y = random.nextInt(length);
+            
+            if (!this.isTileBlocked(x, y) && this.getEntitiesAt(x, y).isEmpty()) {
+                this.addEntity(new Skeleton(this.gameState, x, y));
+                generatedSkeles++;
             }
         }
     }
@@ -88,6 +100,10 @@ public class GameMap {
         this.tiles[x][y].setType(type);
     }
     
+    public void setTile(Coordinate coordinate, TileType type) {
+        this.setTile(coordinate.getX(), coordinate.getY(), type);
+    }
+    
     public Tile getTile(int x, int y) {
         if (x < 0 || x > this.getWidth()-1 ||
             y < 0 || y > this.getHeight()-1) {
@@ -95,7 +111,11 @@ public class GameMap {
         }
         
         return this.tiles[x][y];
-    }   
+    }
+    
+    public Tile getTile(Coordinate coordinate) {
+        return this.getTile(coordinate.getX(), coordinate.getY());
+    }
     
     /**
      * Is the tile blocked by an immovable object such as a wall
@@ -103,6 +123,12 @@ public class GameMap {
      * @return true if tile is blocked, false otherwise
      */
     public boolean isTileBlocked(int x, int y) {
+        // The tile player is standing on is also considered to be blocked
+        if (this.gameState.getPlayer().getX() == x &&
+            this.gameState.getPlayer().getY() == y) {
+            return true;
+        }
+        
         if (x < 0 || x > this.getWidth()-1 ||
             y < 0 || y > this.getHeight()-1) {
             return true;
@@ -110,7 +136,23 @@ public class GameMap {
         
         Tile tile = this.tiles[x][y];
         
-        return tile.getType() == TileType.WALL;
+        if (tile.getType() == TileType.WALL) {
+            return true;
+        }
+        
+        ArrayList<Entity> entities = this.getEntitiesAt(x, y);
+        
+        for (Entity entity : entities) {
+            if (entity.isObstacle()) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean isTileBlocked(Coordinate coordinate) {
+        return this.isTileBlocked(coordinate.getX(), coordinate.getY());
     }
     
     public int getWidth() {

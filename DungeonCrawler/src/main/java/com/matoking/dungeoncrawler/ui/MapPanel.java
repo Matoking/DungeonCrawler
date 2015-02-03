@@ -31,8 +31,8 @@ public class MapPanel extends JPanel {
         this.rows = rows;
         this.columns = columns;
         
-        this.setSize(new Dimension(TileSprite.TILE_WIDTH*rows,
-                                   TileSprite.TILE_HEIGHT*columns));
+        this.setSize(new Dimension(Sprite.TILE_WIDTH*rows,
+                                   Sprite.TILE_HEIGHT*columns));
         
         this.setLocation(x, y);
         
@@ -87,8 +87,8 @@ public class MapPanel extends JPanel {
         int realX = offsetX + x;
         int realY = offsetY + y;
         
-        int spriteX = x * TileSprite.TILE_WIDTH;
-        int spriteY = y * TileSprite.TILE_HEIGHT;
+        int spriteX = x * Sprite.TILE_WIDTH;
+        int spriteY = y * Sprite.TILE_HEIGHT;
         
         Tile tile = gameMap.getTile(realX, realY);
         
@@ -97,7 +97,7 @@ public class MapPanel extends JPanel {
             if (!tile.getImageName().equals("empty")) {
                 BufferedImage tileImage = spriteCache.getImage(tile.getImageName());
 
-                g.drawImage(tileImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
+                g.drawImage(tileImage, spriteX, spriteY, Sprite.TILE_WIDTH, Sprite.TILE_HEIGHT, null);
             }
         }
     }
@@ -120,10 +120,10 @@ public class MapPanel extends JPanel {
                 entity.getY() >= offsetY && entity.getY() < offsetY + this.getColumns()) {
                 BufferedImage entityImage = spriteCache.getImage(entity.getImageName());
                 
-                int spriteX = (entity.getX() - offsetX) * TileSprite.TILE_WIDTH;
-                int spriteY = (entity.getY() - offsetY) * TileSprite.TILE_HEIGHT;
+                int spriteX = (entity.getX() - offsetX) * Sprite.TILE_WIDTH;
+                int spriteY = (entity.getY() - offsetY) * Sprite.TILE_HEIGHT;
                 
-                g.drawImage(entityImage, spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);            
+                g.drawImage(entityImage, spriteX, spriteY, Sprite.TILE_WIDTH, Sprite.TILE_HEIGHT, null);            
             }
         }
     }
@@ -131,10 +131,10 @@ public class MapPanel extends JPanel {
     public void renderPlayer(Graphics g) {
         SpriteCache spriteCache = this.gameFrame.getSpriteCache();
         
-        int spriteX = (this.getRows() / 2) * TileSprite.TILE_WIDTH;
-        int spriteY = (this.getColumns() / 2) * TileSprite.TILE_WIDTH;
+        int spriteX = (this.getRows() / 2) * Sprite.TILE_WIDTH;
+        int spriteY = (this.getColumns() / 2) * Sprite.TILE_WIDTH;
         
-        g.drawImage(spriteCache.getImage("player"), spriteX, spriteY, TileSprite.TILE_WIDTH, TileSprite.TILE_HEIGHT, null);
+        g.drawImage(spriteCache.getImage("player"), spriteX, spriteY, Sprite.TILE_WIDTH, Sprite.TILE_HEIGHT, null);
     }
     
     public int getRows() {

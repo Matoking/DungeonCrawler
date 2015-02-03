@@ -46,8 +46,7 @@ public class Controls implements KeyListener {
                 break;
         }
         
-        this.gameFrame.repaint();
-        this.gameFrame.getLogTextArea().update();
+        this.gameFrame.update();
     }
     
 }

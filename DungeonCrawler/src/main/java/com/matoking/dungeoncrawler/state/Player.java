@@ -1,15 +1,22 @@
 package com.matoking.dungeoncrawler.state;
 
+import java.util.Random;
+
 /**
  * The main Player class
  * 
  * @author matoking
  */
 public class Player {
+    private static final int PLAYER_HEALTH = 50;
+    
     private GameMap gameMap;
     
     private int x;
     private int y;
+    
+    // Player's health, starts at
+    private int health;
     
     // Amount of keys the player has
     private int keys;
@@ -21,6 +28,8 @@ public class Player {
         this.y = y;
         
         this.keys = 0;
+        
+        this.health = PLAYER_HEALTH;
     }
     
     /**
@@ -63,8 +72,32 @@ public class Player {
     public int getKeys() {
         return keys;
     }
+
+    /**
+     * Get player's health
+     * 
+     * @return player's health
+     */
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
     
     public void increaseKeys(int amount) {
         this.keys += amount;
+    }
+    
+    /**
+     * Get the attack power of the player
+     * 
+     * @return Amount of damage the player should deal to the enemy
+     */
+    public int getAttackPower() {
+        Random random = new Random();
+        
+        return random.nextInt(5) + 7;
     }
 }

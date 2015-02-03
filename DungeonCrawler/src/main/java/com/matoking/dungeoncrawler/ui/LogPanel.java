@@ -5,28 +5,44 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Displays the game log
  */
 public class LogPanel extends JPanel {
-    private final static int TEXT_ROWS = 34;
-    private final static int TEXT_COLUMNS = 40;
-    
     private GameState gameState;
     
     private JLabel logText;
+    private JScrollPane scrollPane;
     
     public LogPanel(GameState gameState, int x, int y, int width, int height) {
         this.gameState = gameState;
+        
+        // Set layout to BoxLayout and add padding
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.setBorder(new EmptyBorder(5, 5, 5, 5));
         
         this.setBackground(Color.BLACK);
         
         this.setLocation(x, y);
         this.setSize(width, height);
+        
+        // Create and format the scroll pane
+        this.scrollPane = new JScrollPane();
+        this.scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        this.scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        this.scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrollPane.setBackground(Color.BLACK);
+        this.scrollPane.setOpaque(false);
+        this.scrollPane.getViewport().setOpaque(false);
         
         // Format the text area
         this.logText = new JLabel("<html>");
@@ -34,18 +50,18 @@ public class LogPanel extends JPanel {
         // setSize accepts setSize(int x, int y)
         // setMaximumSize only accepts setMaximumSize(Dimension)
         // :/
-        this.logText.setSize(width+50, height+50);
-        this.logText.setMaximumSize(new Dimension(width, height));
-        
-        this.logText.setLocation(x, y);
-        this.logText.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-        this.logText.setHorizontalAlignment(SwingConstants.LEFT);
+        this.logText.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 4*Sprite.ZOOM_FACTOR));
+        this.logText.setHorizontalAlignment(SwingConstants.LEADING);
+        this.logText.setVerticalAlignment(SwingConstants.TOP);
+        this.logText.setVerticalTextPosition(JLabel.TOP);
         
         this.logText.setText("");
         this.logText.setBackground(Color.BLACK);
         this.logText.setForeground(Color.WHITE);
         
-        this.add(this.logText);
+        this.scrollPane.setViewportView(this.logText);
+        
+        this.add(this.scrollPane);
         
         this.update();
     }
@@ -58,15 +74,16 @@ public class LogPanel extends JPanel {
         
         String text = "";
         
-        for (int i=messages.size()-1; i >= 0; i--) {
-            String message = messages.get(i);
-            
+        for (String message : messages) {
             text += message + "<br><br>";
         }
         
-        // Subtracting 80 pixels from width makes sure the text doesn't clip for
+        // Subtracting 100 pixels from width makes sure the text doesn't clip for
         // whatever reason
-        this.logText.setText(String.format("<html><body style='width: %dpx;'>%s</body></html>", this.getWidth()-80, text));
+        this.logText.setText(String.format("<html><body style='width: %dpx;'>%s</body></html>", this.getWidth()-100, text));
+        
+        this.validate();
+        this.scrollPane.getVerticalScrollBar().setValue(this.scrollPane.getVerticalScrollBar().getMaximum());
     }
     
 }
