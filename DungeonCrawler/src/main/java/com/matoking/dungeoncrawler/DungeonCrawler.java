@@ -12,7 +12,7 @@ public class DungeonCrawler {
             @Override
             public void run() {
                 GameState gameState = new GameState();
-                gameState.getGameMap().generateMap();
+                gameState.startGame();
                 
                 GameFrame gameFrame = new GameFrame(gameState);
                 gameFrame.setVisible(true);

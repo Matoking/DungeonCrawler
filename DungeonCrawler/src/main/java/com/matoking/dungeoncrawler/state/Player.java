@@ -68,6 +68,15 @@ public class Player {
     public void setY(int y) {
         this.y = y;
     }
+    
+    /**
+     * Returns player's position as a Coordinate
+     * 
+     * @return Coordinate with player's position
+     */
+    public Coordinate getCoordinate() {
+        return new Coordinate(this.getX(), this.getY());
+    }
 
     public int getKeys() {
         return keys;

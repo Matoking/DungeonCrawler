@@ -51,9 +51,18 @@ public class GameMessages {
         return String.format(getMessageFromList("player_kills_skeleton"), damage);
     }
     
+    static public String getSkeletonStartsChase() {
+        return getMessageFromList("skeleton_starts_chase");
+    }
+    
+    static public String getSkeletonEndsChase() {
+        return getMessageFromList("skeleton_ends_chase");
+    }
+    
     /**
      * Get a random message from the provided list, which is loaded from a
      * text file of the same name
+     * 
      * @param list String that corresponds to a list and the text file
      * @return A random String from the list
      */
@@ -86,6 +95,8 @@ public class GameMessages {
             }
         }
         
+        // The list of messages has been loaded to gameMessages[list]
+        // Now, pick a random message from that list
         ArrayList<String> messages = gameMessages.get(list);
         
         int randInt = random.nextInt(messages.size());

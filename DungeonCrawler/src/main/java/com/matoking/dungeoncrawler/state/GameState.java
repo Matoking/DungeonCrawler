@@ -1,22 +1,26 @@
 package com.matoking.dungeoncrawler.state;
 
-import com.matoking.dungeoncrawler.state.entities.Key;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * The main class containing the game's state: GameMap, GameLog, Player
  */
 public class GameState {
     private GameMap gameMap;
+    private Pathfinding pathfinding;
+    
     private GameLog gameLog;
     
     private Player player;
     
     public GameState() {
         this.gameMap = new GameMap(this);
+        
         this.gameLog = new GameLog(this);
         
         this.player = new Player(this.gameMap, 5, 5);
+        this.pathfinding = new Pathfinding(this);
         
         this.startGame();
     }
@@ -27,6 +31,8 @@ public class GameState {
     public void startGame() {
         this.gameMap = null;
         this.gameMap = new GameMap(this);
+         
+        this.gameMap.generateMap();
         
         this.player = null;
         this.player = new Player(this.gameMap, 5, 5);
@@ -34,6 +40,15 @@ public class GameState {
         this.gameLog.clearMessages();
         
         this.gameLog.addMessage(GameMessages.getGameStartMessage());
+        
+        Random random = new Random();
+        
+        while (true) {
+            Entity entity = this.gameMap.getEntities().get(11);
+            
+            this.pathfinding.getNextStepTo(new Coordinate(5, 5), new Coordinate(entity.getX(), entity.getY()));
+            break;
+        }
     }
     
     /**
@@ -72,5 +87,9 @@ public class GameState {
 
     public Player getPlayer() {
         return this.player;
+    }
+
+    public Pathfinding getPathfinding() {
+        return pathfinding;
     }
 }

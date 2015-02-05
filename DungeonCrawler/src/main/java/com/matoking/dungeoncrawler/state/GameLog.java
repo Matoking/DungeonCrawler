@@ -35,6 +35,9 @@ public class GameLog {
         return this.messages;
     }
     
+    /**
+     * Clear all of the messages in the log
+     */
     public void clearMessages() {
         this.messages.clear();
     }

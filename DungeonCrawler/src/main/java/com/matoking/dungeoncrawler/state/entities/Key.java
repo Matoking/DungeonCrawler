@@ -5,7 +5,9 @@ import com.matoking.dungeoncrawler.state.GameMessages;
 import com.matoking.dungeoncrawler.state.GameState;
 
 /**
- *
+ * Key is an item the player can pick up. Once player has collected all the keys,
+ * the game is won
+ * 
  * @author matoking
  */
 public class Key implements Entity {

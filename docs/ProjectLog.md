@@ -21,3 +21,15 @@
 ===
 - Refactored LogTextArea (renamed LogPanel) to work with JLabel, allowing use of HTML markup
 - Added panel to display player health
+
+03.02.2015
+15:00-18:00
+===
+- Worked on the first enemy
+- Reworked LogPanel to work on BoxLayout instead of whatever manual positioning hackjob it used before
+
+05.02.2015
+13:00-17:00
+===
+- Worked on pathfinding (using Dijkstra's algorithm)
+- Made the skeleton enemy chase the player when player comes too close
