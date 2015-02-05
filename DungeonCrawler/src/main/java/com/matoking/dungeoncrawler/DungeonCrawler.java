@@ -14,6 +14,8 @@ public class DungeonCrawler {
                 GameState gameState = new GameState();
                 gameState.startGame();
                 
+                gameState.getGameMap().generateMap();
+                
                 GameFrame gameFrame = new GameFrame(gameState);
                 gameFrame.setVisible(true);
             }

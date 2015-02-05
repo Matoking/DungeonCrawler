@@ -140,6 +140,8 @@ public class Pathfinding {
             this.queue.add(coordinate);
         }
         
+        int steps = 0;
+        
         while (!this.queue.isEmpty()) {
             Coordinate smallest = this.queue.poll();
             

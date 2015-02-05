@@ -36,8 +36,6 @@ public class GameMapTest {
     public void setUp() {
         this.gameState = new GameState();
         this.gameMap = this.gameState.getGameMap();
-        
-        this.gameMap.isTileBlocked(0, 0);
     }
     
     @After
@@ -59,7 +57,10 @@ public class GameMapTest {
     public void testNoTilesBlockedOnEmptyMap() {
         for (int x=0; x < this.gameMap.getWidth(); x++) {
             for (int y=0; y < this.gameMap.getHeight(); y++) {
-                assertEquals(false, this.gameMap.isTileBlocked(x, y));
+                // Player is placed on 5x5
+                if (x != 5 && y != 5) {
+                    assertEquals(false, this.gameMap.isTileBlocked(x, y));
+                }
             }
         }
     }
@@ -70,9 +71,9 @@ public class GameMapTest {
         
         assertEquals(true, this.gameMap.isTileBlocked(5, 5));
         
-        this.gameMap.setTile(5, 5, TileType.EMPTY);
+        this.gameMap.setTile(7, 7, TileType.EMPTY);
         
-        assertEquals(false, this.gameMap.isTileBlocked(5, 5));
+        assertEquals(false, this.gameMap.isTileBlocked(7, 7));
     }
     
     @Test

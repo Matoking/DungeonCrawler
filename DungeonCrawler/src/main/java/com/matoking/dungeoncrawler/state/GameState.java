@@ -31,8 +31,6 @@ public class GameState {
     public void startGame() {
         this.gameMap = null;
         this.gameMap = new GameMap(this);
-         
-        this.gameMap.generateMap();
         
         this.player = null;
         this.player = new Player(this.gameMap, 5, 5);
@@ -40,15 +38,6 @@ public class GameState {
         this.gameLog.clearMessages();
         
         this.gameLog.addMessage(GameMessages.getGameStartMessage());
-        
-        Random random = new Random();
-        
-        while (true) {
-            Entity entity = this.gameMap.getEntities().get(11);
-            
-            this.pathfinding.getNextStepTo(new Coordinate(5, 5), new Coordinate(entity.getX(), entity.getY()));
-            break;
-        }
     }
     
     /**

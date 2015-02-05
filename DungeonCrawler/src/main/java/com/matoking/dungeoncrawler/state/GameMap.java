@@ -78,7 +78,7 @@ public class GameMap {
         }
         
         int generatedSkeles = 0;
-        while (generatedSkeles < 100) {
+        while (generatedSkeles < 10) {
             int x = random.nextInt(length);
             int y = random.nextInt(length);
             
@@ -192,19 +192,5 @@ public class GameMap {
         }
         
         return entities;
-    }
-    
-    /**
-     * Using Dijkstra's algorithm, find the way from starting coordinate to goal
-     * 
-     * @param startX X-coordinate of the starting position
-     * @param startY Y-coordinate of the starting position
-     * @param goalX X-coordinate of the goal
-     * @param goalY Y-coordinate of the goal
-     * @return If a valid path is found, Direction representing the next step to take is returned
-     *         If valid path isn't found, null is returned
-     */
-    public Direction getDirectionTo(int startX, int startY, int goalX, int goalY) {
-        
     }
 }
