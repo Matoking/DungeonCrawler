@@ -37,13 +37,24 @@ public class Tile {
         return type;
     }
     
+    public boolean isFloor() {
+        if (this.getType() == TileType.STONE_FLOOR || this.getType() == TileType.WOODEN_FLOOR) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public String getImageName() {
         switch (this.getType()) {
             case WALL:
                 return "wall";
                 
-            case FLOOR:
-                return "floor";
+            case WOODEN_FLOOR:
+                return "wooden_floor";
+                
+            case STONE_FLOOR:
+                return "stone_floor";
                 
             default:
                 return "empty";

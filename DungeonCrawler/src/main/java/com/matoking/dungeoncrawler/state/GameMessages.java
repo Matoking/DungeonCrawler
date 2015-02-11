@@ -32,6 +32,35 @@ public class GameMessages {
     }
     
     /**
+     * Get a "game won" message
+     * 
+     * @return Game log message as String
+     */
+    static public String getGameWonMessage() {
+        return getMessageFromList("game_won");
+    }
+    
+    /**
+     * Get a "game lost" message
+     * 
+     * @return Game log message as String
+     */
+    static public String getGameLostMessage() {
+        return getMessageFromList("game_lost");
+    }
+    
+    /**
+     * Get a "x keys remaining" message
+     * 
+     * @param keysRemaining Keys remaining
+     * 
+     * @return Game log message as String
+     */
+    static public String getKeysRemainingMessage(int keysRemaining) {
+        return String.format(getMessageFromList("keys_remaining"), keysRemaining);
+    }
+    
+    /**
      * Get a "player hits the skeleton" message
      * 
      * @param damage How much damage player dealt to the skeleton
@@ -45,16 +74,38 @@ public class GameMessages {
      * Get a "player kills the skeleton" message
      * 
      * @param damage How much damage player dealt to the skeleton
+     * 
      * @return Game log message as String
      */
     static public String getPlayerKillsSkeleton(int damage) {
         return String.format(getMessageFromList("player_kills_skeleton"), damage);
     }
     
+    /**
+     * Get a "skeleton hits player" message
+     * 
+     * @param damage How much damage skeleton dealt to the player
+     * 
+     * @return 
+     */
+    static public String getSkeletonHitsPlayer(int damage) {
+        return String.format(getMessageFromList("skeleton_hits_player"), damage);
+    }
+    
+    /**
+     * Get a "skeleton has started chasing player" message
+     * 
+     * @return Game log message as String
+     */
     static public String getSkeletonStartsChase() {
         return getMessageFromList("skeleton_starts_chase");
     }
     
+    /**
+     * Get a "skeleton has stopped chasing player" message
+     * 
+     * @return Game log message as String
+     */
     static public String getSkeletonEndsChase() {
         return getMessageFromList("skeleton_ends_chase");
     }

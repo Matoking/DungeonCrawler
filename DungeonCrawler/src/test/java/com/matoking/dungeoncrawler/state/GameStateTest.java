@@ -70,17 +70,18 @@ public class GameStateTest {
     public void playerInteractsWithNonSolidEntity() {
         this.gameState.getPlayer().setX(5);
         this.gameState.getPlayer().setY(5);
+        this.gameState.getPlayer().setRemainingKeys(2);
         
         this.gameState.getGameMap().addEntity(new Key(this.gameState, 5, 6));
         
-        assertEquals(this.gameState.getPlayer().getKeys(), 0);
+        assertEquals(this.gameState.getPlayer().getRemainingKeys(), 2);
 
         // When player moves down, he should pick up the key and remove
         // the entity representing the key
         this.gameState.performMove(Direction.DOWN);
         
         assertEquals(this.gameState.getGameMap().getEntities().size(), 0);
-        assertEquals(this.gameState.getPlayer().getKeys(), 1);
+        assertEquals(this.gameState.getPlayer().getRemainingKeys(), 1);
     }
     
 }

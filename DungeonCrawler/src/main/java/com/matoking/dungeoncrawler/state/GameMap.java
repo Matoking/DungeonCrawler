@@ -31,11 +31,7 @@ public class GameMap {
         this.tiles = new Tile[width][height];
         this.entities = new ArrayList<Entity>();
         
-        for (int x=0; x < width; x++) {
-            for (int y=0; y < height; y++) {
-                this.tiles[x][y] = new Tile(x, y, TileType.EMPTY);
-            }
-        }
+        this.createMap(width, height);
     }
     
     public GameMap(GameState gameState) {
@@ -43,48 +39,20 @@ public class GameMap {
     }
     
     /**
-     * Generate the map
-     * This will probably be offloaded to a different class but for now do some
-     * placeholder testing
-     * 
+     * Create an empty map with defined width and height
+     * @param width The width of map
+     * @param height The height of map
      */
-    public void generateMap() {
-        Random random = new Random();
+    public void createMap(int width, int height) {
+        this.width = width;
+        this.height = height;
         
-        int length = random.nextInt(25) + 30;
-        for (int x=0; x < length; x++) {
-            for (int y=0; y < length; y++) {
-                this.setTile(x, y, TileType.WALL);
-            }
-        }
+        this.tiles = new Tile[width][height];
+        this.entities = new ArrayList<Entity>();
         
-        for (int x=1; x < length - 1; x++) {
-            for (int y=1; y < length - 1; y++) {
-                this.setTile(x, y, random.nextInt(100) < 85 ? TileType.FLOOR : TileType.WALL);
-            }
-        }
-        
-        this.setTile(5, 5, TileType.FLOOR);
-        
-        int generatedKeys = 0;
-        while (generatedKeys < 10) {
-            int x = random.nextInt(length);
-            int y = random.nextInt(length);
-            
-            if (!this.isTileBlocked(x, y) && this.getEntitiesAt(x, y).isEmpty()) {
-                this.addEntity(new Key(this.gameState, x, y));
-                generatedKeys++;
-            }
-        }
-        
-        int generatedSkeles = 0;
-        while (generatedSkeles < 10) {
-            int x = random.nextInt(length);
-            int y = random.nextInt(length);
-            
-            if (!this.isTileBlocked(x, y) && this.getEntitiesAt(x, y).isEmpty()) {
-                this.addEntity(new Skeleton(this.gameState, x, y));
-                generatedSkeles++;
+        for (int x=0; x < width; x++) {
+            for (int y=0; y < height; y++) {
+                this.tiles[x][y] = new Tile(x, y, TileType.EMPTY);
             }
         }
     }
@@ -115,6 +83,16 @@ public class GameMap {
     
     public Tile getTile(Coordinate coordinate) {
         return this.getTile(coordinate.getX(), coordinate.getY());
+    }
+    
+    public TileType getTileType(int x, int y) {
+        Tile tile = this.getTile(x, y);
+        
+        if (tile != null) {
+            return tile.getType();
+        } else {
+            return TileType.EMPTY;
+        }
     }
     
     /**

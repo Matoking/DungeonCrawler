@@ -23,6 +23,9 @@ public class Skeleton implements Entity {
     private final static int DEFAULT_HEALTH = 50;
     private final static int DEFAULT_CHASE_STEP_COUNT = 10;
     
+    private final static int MIN_DAMAGE_TO_PLAYER = 4;
+    private final static int MAX_DAMAGE_TO_PLAYER = 8;
+    
     private final static int ENEMY_AREA_RADIUS = 8;
     
     private GameState gameState;
@@ -126,6 +129,10 @@ public class Skeleton implements Entity {
                 return;
             } else if (nextStep.equals(playerCoordinate)) {
                 // Player is right next to the enemy, attack
+                int damageToPlayer = this.getAttackPower();
+                
+                this.gameState.getPlayer().decreaseHealth(damageToPlayer);
+                this.gameState.getGameLog().addMessage(GameMessages.getSkeletonHitsPlayer(damageToPlayer));
             } else {
                 // Move towards the player
                 this.setX(nextStep.getX());
@@ -143,6 +150,17 @@ public class Skeleton implements Entity {
                 this.gameState.getGameLog().addMessage(GameMessages.getSkeletonEndsChase());
             }
         }
+    }
+    
+    /**
+     * Get enemy's attack power
+     * 
+     * @return Enemy's attack power as an integer
+     */
+    private int getAttackPower() {
+        Random random = new Random();
+        
+        return random.nextInt(MAX_DAMAGE_TO_PLAYER - MIN_DAMAGE_TO_PLAYER) + MIN_DAMAGE_TO_PLAYER;
     }
     
     /**

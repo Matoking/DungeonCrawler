@@ -1,7 +1,7 @@
 package com.matoking.dungeoncrawler.state;
 
+import com.matoking.dungeoncrawler.generator.MapGenerator;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * The main class containing the game's state: GameMap, GameLog, Player
@@ -9,20 +9,20 @@ import java.util.Random;
 public class GameState {
     private GameMap gameMap;
     private Pathfinding pathfinding;
-    
+    private MapGenerator mapGenerator;
+
     private GameLog gameLog;
     
     private Player player;
     
     public GameState() {
         this.gameMap = new GameMap(this);
+        this.pathfinding = new Pathfinding(this);
+        this.mapGenerator = new MapGenerator(this);
         
         this.gameLog = new GameLog(this);
         
         this.player = new Player(this.gameMap, 5, 5);
-        this.pathfinding = new Pathfinding(this);
-        
-        this.startGame();
     }
     
     /**
@@ -31,6 +31,8 @@ public class GameState {
     public void startGame() {
         this.gameMap = null;
         this.gameMap = new GameMap(this);
+        
+        this.mapGenerator.generateMap(GameMap.MAP_DEFAULT_WIDTH, GameMap.MAP_DEFAULT_HEIGHT);
         
         this.player = null;
         this.player = new Player(this.gameMap, 5, 5);
@@ -64,6 +66,29 @@ public class GameState {
         for (Entity entity : this.getGameMap().getEntities()) {
             entity.step();
         }
+        
+        this.checkLoseState();
+        this.checkWinState();
+    }
+    
+    /**
+     * Check if the player has won the game. In case he has, display a victory message
+     * and prevent the player from moving
+     */
+    public void checkWinState() {
+        if (this.getPlayer().getRemainingKeys() == 0) {
+            this.getGameLog().addMessage(GameMessages.getGameWonMessage());
+        }
+    }
+    
+    /**
+     * Check if the player has lost the game. In case he has, display a game over message
+     * and prevent the player from moving
+     */
+    public void checkLoseState() {
+        if (this.getPlayer().getHealth() == 0) {
+            this.getGameLog().addMessage(GameMessages.getGameLostMessage());
+        }
     }
 
     public GameLog getGameLog() {
@@ -80,5 +105,9 @@ public class GameState {
 
     public Pathfinding getPathfinding() {
         return pathfinding;
+    }
+    
+    public MapGenerator getMapGenerator() {
+        return mapGenerator;
     }
 }

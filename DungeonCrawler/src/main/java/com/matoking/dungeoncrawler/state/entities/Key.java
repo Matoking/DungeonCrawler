@@ -34,9 +34,10 @@ public class Key implements Entity {
     // When player touches the button, remove the key entity and increase player's key count
     @Override
     public void onPlayerTouch() {
-        this.gameState.getPlayer().increaseKeys(1);
+        this.gameState.getPlayer().decreaseKeys(1);
         this.gameState.getGameMap().removeEntity(this);
         this.gameState.getGameLog().addMessage(GameMessages.getKeyPickupMessage());
+        this.gameState.getGameLog().addMessage(GameMessages.getKeysRemainingMessage(this.gameState.getPlayer().getRemainingKeys()));
     }
 
     @Override

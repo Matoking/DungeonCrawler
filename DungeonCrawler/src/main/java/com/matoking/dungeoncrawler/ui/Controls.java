@@ -44,6 +44,11 @@ public class Controls implements KeyListener {
             case KeyEvent.VK_LEFT:
                 gameState.performMove(Direction.LEFT);
                 break;
+                
+            case KeyEvent.VK_R:
+                // R key restarts the game
+                gameState.startGame();
+                break;
         }
         
         this.gameFrame.update();

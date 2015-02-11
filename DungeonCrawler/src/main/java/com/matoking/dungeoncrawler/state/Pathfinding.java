@@ -34,7 +34,8 @@ public class Pathfinding {
      * 
      * @param start Coordinate of the starting position
      * @param goal Coordinate of the goal
-     * @return Direction to move to in order to follow the shortest path to the goal
+     * @return Direction to move to in order to follow the shortest path to the goal, null if
+     *         valid path couldn't be found
      */
     public Coordinate getNextStepTo(Coordinate start, Coordinate goal) {
         this.calculateShortestPath(start, goal);
@@ -43,11 +44,18 @@ public class Pathfinding {
         
         // We are only interested in the very first step leading to the goal, so get that
         int stepsToGoal = 0;
+        
         ArrayDeque<Coordinate> nodesToTarget = new ArrayDeque<Coordinate>();
         while (this.previous[target] != 0) {
             nodesToTarget.add(convertFromInt(target));
             target = this.previous[target];
+            
             stepsToGoal++;
+            
+            // Prevent freezing by ignoring non-valid, endless paths
+            if (stepsToGoal > 10000) {
+                return null;
+            }
         }
         
         Coordinate coordinate = null;
@@ -77,20 +85,27 @@ public class Pathfinding {
         int startNode = convertToInt(start);
         int goalNode = convertToInt(goal);
         
+        this.graph = null;
         this.graph = new ArrayList[nodeCount];
         
         for (int i=0; i < nodeCount; i++) {
             this.graph[i] = new ArrayList<Integer>();
         }
         
+        this.previous = null;
         this.previous = new int[nodeCount];
         
+        this.distance = null;
         this.distance = new int[nodeCount];
+        
+        this.length = null;
         this.length = new int[nodeCount][nodeCount];
+        
+        this.scanned = null;
         this.scanned = new boolean[nodeCount];
         
+        this.queue = null;
         this.queue = new PriorityQueue<Coordinate>();
-        
         // Add all of the tiles in the map
         for (int x=0; x < gameMap.getWidth(); x++) {
             for (int y=0; y < gameMap.getHeight(); y++) {

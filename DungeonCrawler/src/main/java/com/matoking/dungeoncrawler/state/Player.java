@@ -18,8 +18,8 @@ public class Player {
     // Player's health, starts at
     private int health;
     
-    // Amount of keys the player has
-    private int keys;
+    // Amount of keys the player still has to collect
+    private int remainingKeys;
     
     public Player(GameMap gameMap, int x, int y) {
         this.gameMap = gameMap;
@@ -27,7 +27,7 @@ public class Player {
         this.x = x;
         this.y = y;
         
-        this.keys = 0;
+        this.remainingKeys = 0;
         
         this.health = PLAYER_HEALTH;
     }
@@ -36,6 +36,7 @@ public class Player {
      * Move in a direction if the direction isn't blocked by a wall
      * 
      * @param direction 
+     * @return True if player moved, false if the player was blocked by something
      */
     public boolean move(Direction direction) {
         Coordinate newCoordinates = Coordinate.getNewCoordinates(direction, x, y);
@@ -77,9 +78,13 @@ public class Player {
     public Coordinate getCoordinate() {
         return new Coordinate(this.getX(), this.getY());
     }
+    
+    public void setRemainingKeys(int amount) {
+        this.remainingKeys = amount;
+    }
 
-    public int getKeys() {
-        return keys;
+    public int getRemainingKeys() {
+        return remainingKeys;
     }
 
     /**
@@ -95,8 +100,16 @@ public class Player {
         this.health = health;
     }
     
-    public void increaseKeys(int amount) {
-        this.keys += amount;
+    public void decreaseHealth(int amount) {
+        this.health -= amount;
+        
+        if (this.health < 0) {
+            this.health = 0;
+        }
+    }
+    
+    public void decreaseKeys(int amount) {
+        this.remainingKeys -= amount;
     }
     
     /**

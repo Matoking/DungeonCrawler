@@ -1,5 +1,6 @@
 package com.matoking.dungeoncrawler;
 
+import com.matoking.dungeoncrawler.state.GameMap;
 import com.matoking.dungeoncrawler.state.GameState;
 import com.matoking.dungeoncrawler.ui.GameFrame;
 
@@ -14,7 +15,7 @@ public class DungeonCrawler {
                 GameState gameState = new GameState();
                 gameState.startGame();
                 
-                gameState.getGameMap().generateMap();
+                gameState.getMapGenerator().generateMap(GameMap.MAP_DEFAULT_WIDTH, GameMap.MAP_DEFAULT_HEIGHT);
                 
                 GameFrame gameFrame = new GameFrame(gameState);
                 gameFrame.setVisible(true);

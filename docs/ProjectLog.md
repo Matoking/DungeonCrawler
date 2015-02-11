@@ -33,3 +33,11 @@
 ===
 - Worked on pathfinding (using Dijkstra's algorithm)
 - Made the skeleton enemy chase the player when player comes too close
+
+11.02.2015
+16:00-20:00
+===
+- Started implementing the map generator
+- Skeletons now attack the player
+- Implemented lose and win states
+- Added more tests

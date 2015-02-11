@@ -17,7 +17,10 @@ import static org.junit.Assert.*;
  * @author matoking
  */
 public class PathfindingTest {
+    public GameState gameState;
+    
     public Pathfinding pathfinding;
+    public GameMap gameMap;
     
     public PathfindingTest() {
     }
@@ -32,7 +35,10 @@ public class PathfindingTest {
     
     @Before
     public void setUp() {
-        this.pathfinding = new Pathfinding(new GameState());
+        this.gameState = new GameState();
+        
+        this.pathfinding = new Pathfinding(this.gameState);
+        this.gameMap = this.gameState.getGameMap();
     }
     
     @After
@@ -50,6 +56,28 @@ public class PathfindingTest {
                 assertEquals(coordinate.getY(), y);
             }
         }
+    }
+    
+    @Test
+    public void testPathfinding() {
+        int[][] map = new int[6][10];
+        
+        map[0] = new int[] {1,1,1,1,1,1,1,1,1,1};
+        map[1] = new int[] {1,0,0,1,1,1,0,0,0,1};
+        map[2] = new int[] {1,1,0,1,1,1,0,0,0,1};
+        map[3] = new int[] {1,1,0,1,1,1,1,1,0,1};
+        map[4] = new int[] {1,1,0,0,0,0,0,0,0,1};
+        map[5] = new int[] {1,1,1,1,1,1,1,1,1,1};
+        
+        for (int x=0; x < 6; x++) {
+            for (int y=0; y < 10; y++) {
+                this.gameMap.setTile(x, y, map[x][y] == 0 ? TileType.WOODEN_FLOOR : TileType.WALL);
+            }
+        }
+        
+        Coordinate firstStep = this.pathfinding.getNextStepTo(new Coordinate(1,1), new Coordinate(1, 6));
+        
+        assertEquals(firstStep, new Coordinate(1, 2));
     }
     
 }
