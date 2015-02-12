@@ -50,12 +50,12 @@ public class SkeletonTest {
         
         gameMap.addEntity(new Skeleton(this.gameState, 6, 5));
                 
-        assertEquals(gameMap.getEntitiesAt(6, 5).get(0).getImageName(), "skeleton");
+        assertEquals("skeleton", gameMap.getEntitiesAt(6, 5).get(0).getImageName());
         
         // Skeleton will notice player after a turn has passed and the player is within range
         this.gameState.performMove(Direction.RIGHT);
         
-        assertEquals(gameMap.getEntitiesAt(6, 5).get(0).getImageName(), "skeleton_aggro");
+        assertEquals("skeleton_aggro", gameMap.getEntitiesAt(6, 5).get(0).getImageName());
     }
     
     @Test
@@ -73,7 +73,7 @@ public class SkeletonTest {
             this.gameState.performMove(Direction.RIGHT);
         }
         
-        assertEquals(gameMap.getEntitiesAt(6, 5).size(), 0);
+        assertEquals(0, gameMap.getEntitiesAt(6, 5).size());
     }
     
     @Test

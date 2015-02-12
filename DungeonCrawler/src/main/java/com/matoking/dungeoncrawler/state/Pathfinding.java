@@ -22,6 +22,8 @@ public class Pathfinding {
     
     private boolean[] scanned;
     
+    private int stepsToGoal = -1;
+    
     public PriorityQueue<Coordinate> queue;
     
     public Pathfinding(GameState gameState) {
@@ -38,22 +40,25 @@ public class Pathfinding {
      *         valid path couldn't be found
      */
     public Coordinate getNextStepTo(Coordinate start, Coordinate goal) {
+        this.stepsToGoal = -1;
+        
         this.calculateShortestPath(start, goal);
         
         int target = convertToInt(goal.getX(), goal.getY());
         
         // We are only interested in the very first step leading to the goal, so get that
-        int stepsToGoal = 0;
+        this.stepsToGoal = 0;
         
         ArrayDeque<Coordinate> nodesToTarget = new ArrayDeque<Coordinate>();
         while (this.previous[target] != 0) {
             nodesToTarget.add(convertFromInt(target));
             target = this.previous[target];
             
-            stepsToGoal++;
+            this.stepsToGoal++;
             
             // Prevent freezing by ignoring non-valid, endless paths
-            if (stepsToGoal > 10000) {
+            if (this.stepsToGoal > 10000) {
+                this.stepsToGoal = -1;
                 return null;
             }
         }
@@ -68,6 +73,16 @@ public class Pathfinding {
         } else {
             return coordinate;
         }
+    }
+    
+    /**
+     * Gets amount of steps to goal
+     * 
+     * @return Returns -1 if no pathfinding has been done or no valid path was found, otherwise
+     *         returns amount of steps to goal
+     */
+    public int getStepsToGoal() {
+        return this.stepsToGoal;
     }
     
     /**

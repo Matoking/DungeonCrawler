@@ -49,6 +49,10 @@ public class GameState {
      * @param direction Direction to perform a move to
      */
     public void performMove(Direction direction) {
+        if (this.isGameWon() || this.isGameLost()) {
+            return;
+        }
+        
         ArrayList<Entity> entities = null;
         if (!this.player.move(direction)) {
             entities = this.gameMap.getEntitiesAt(Coordinate.getNewX(direction, this.player.getX()), 
@@ -67,28 +71,35 @@ public class GameState {
             entity.step();
         }
         
-        this.checkLoseState();
-        this.checkWinState();
+        if (this.isGameLost()) {
+            this.getGameLog().addMessage(GameMessages.getGameLostMessage());
+        } else if (this.isGameWon()) {
+            this.getGameLog().addMessage(GameMessages.getGameWonMessage());
+        }
     }
     
     /**
      * Check if the player has won the game. In case he has, display a victory message
      * and prevent the player from moving
      */
-    public void checkWinState() {
+    public boolean isGameWon() {
         if (this.getPlayer().getRemainingKeys() == 0) {
-            this.getGameLog().addMessage(GameMessages.getGameWonMessage());
+            return true;
         }
+        
+        return false;
     }
     
     /**
      * Check if the player has lost the game. In case he has, display a game over message
      * and prevent the player from moving
      */
-    public void checkLoseState() {
+    public boolean isGameLost() {
         if (this.getPlayer().getHealth() == 0) {
-            this.getGameLog().addMessage(GameMessages.getGameLostMessage());
+            return true;
         }
+        
+        return false;
     }
 
     public GameLog getGameLog() {

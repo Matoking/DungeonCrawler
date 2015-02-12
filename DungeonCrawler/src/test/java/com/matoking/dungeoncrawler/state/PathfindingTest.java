@@ -77,7 +77,11 @@ public class PathfindingTest {
         
         Coordinate firstStep = this.pathfinding.getNextStepTo(new Coordinate(1,1), new Coordinate(1, 6));
         
+        // First step is on the right
         assertEquals(firstStep, new Coordinate(1, 2));
+        
+        // 15 steps to reach the goal
+        assertEquals(this.pathfinding.getStepsToGoal(), 15);
     }
     
 }

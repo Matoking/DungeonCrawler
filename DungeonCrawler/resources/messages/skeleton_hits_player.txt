@@ -1,4 +1,4 @@
 # %1$d = damage dealt
 The <b>spooky skeleton</b> waves his arms at you, dealing <b style='color: red;'>%1$d</b> of haunt damage.
-The <b>skeleton</b> punches you with his fragile bony fist, somehow dealing <b style='color: red;'>%1$d</b> of damage.
+The <b>skeleton</b> punches you with his fragile bony fist, somehow dealing <b style='color: red;'>%1$d</b> damage.
 The <b>skeleton</b> gnaws on your skin with his teeth, dealing <b style='color: red;'>%1$d</b> of damage.

@@ -27,7 +27,7 @@ public class Player {
         this.x = x;
         this.y = y;
         
-        this.remainingKeys = 0;
+        this.remainingKeys = 5;
         
         this.health = PLAYER_HEALTH;
     }
