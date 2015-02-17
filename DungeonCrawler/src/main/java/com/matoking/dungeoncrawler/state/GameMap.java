@@ -11,8 +11,8 @@ import java.util.Random;
  * @author matoking
  */
 public class GameMap {
-    public static int MAP_DEFAULT_WIDTH = 64;
-    public static int MAP_DEFAULT_HEIGHT = 64;
+    public static int MAP_DEFAULT_WIDTH = 48;
+    public static int MAP_DEFAULT_HEIGHT = 48;
     
     private GameState gameState;
     

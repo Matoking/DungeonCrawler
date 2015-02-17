@@ -1,4 +1,4 @@
-But... the future refused to change. 
-Game over.
-Fission mailed.
-You've met with a terrible fate, haven't you?
+<b style='color: red;'>But... the future refused to change.</b>
+<b style='color: red;'>Game over.</b>
+<b style='color: red;'>Fission mailed.</b>
+<b style='color: red;'>You've met with a terrible fate, haven't you?</b>

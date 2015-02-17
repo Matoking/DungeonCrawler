@@ -38,7 +38,8 @@ public class Tile {
     }
     
     public boolean isFloor() {
-        if (this.getType() == TileType.STONE_FLOOR || this.getType() == TileType.WOODEN_FLOOR) {
+        if (this.getType() == TileType.STONE_FLOOR || this.getType() == TileType.WOODEN_FLOOR ||
+            this.getType() == TileType.STONE_CORRIDOR_FLOOR || this.getType() == TileType.WOODEN_CORRIDOR_FLOOR) {
             return true;
         } else {
             return false;
@@ -55,6 +56,12 @@ public class Tile {
                 
             case STONE_FLOOR:
                 return "stone_floor";
+                
+            case WOODEN_CORRIDOR_FLOOR:
+                return "wooden_corridor_floor";
+                
+            case STONE_CORRIDOR_FLOOR:
+                return "stone_corridor_floor";
                 
             default:
                 return "empty";

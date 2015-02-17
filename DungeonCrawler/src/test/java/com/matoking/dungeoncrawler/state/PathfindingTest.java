@@ -59,7 +59,7 @@ public class PathfindingTest {
     }
     
     @Test
-    public void testPathfinding() {
+    public void testPathfindingCorrectPathOnMaze() {
         int[][] map = new int[6][10];
         
         map[0] = new int[] {1,1,1,1,1,1,1,1,1,1};
@@ -75,10 +75,31 @@ public class PathfindingTest {
             }
         }
         
-        Coordinate firstStep = this.pathfinding.getNextStepTo(new Coordinate(1,1), new Coordinate(1, 6));
+        this.pathfinding.calculateShortestPath(new Coordinate(1, 1), new Coordinate(6, 1));
+        Coordinate firstStep = this.pathfinding.getNextStepToGoal();
         
         // First step is on the right
-        assertEquals(firstStep, new Coordinate(1, 2));
+        assertEquals(new Coordinate(1, 2), firstStep);
+    }
+    
+    @Test
+    public void testPathfindingCorrectStepCountOnMaze() {
+        int[][] map = new int[6][10];
+        
+        map[0] = new int[] {1,1,1,1,1,1,1,1,1,1};
+        map[1] = new int[] {1,0,0,1,1,1,0,0,0,1};
+        map[2] = new int[] {1,1,0,1,1,1,0,0,0,1};
+        map[3] = new int[] {1,1,0,1,1,1,1,1,0,1};
+        map[4] = new int[] {1,1,0,0,0,0,0,0,0,1};
+        map[5] = new int[] {1,1,1,1,1,1,1,1,1,1};
+        
+        for (int x=0; x < 6; x++) {
+            for (int y=0; y < 10; y++) {
+                this.gameMap.setTile(x, y, map[x][y] == 0 ? TileType.WOODEN_FLOOR : TileType.WALL);
+            }
+        }
+        
+        this.pathfinding.calculateShortestPath(new Coordinate(1, 1), new Coordinate(6, 1));
         
         // 15 steps to reach the goal
         assertEquals(this.pathfinding.getStepsToGoal(), 15);

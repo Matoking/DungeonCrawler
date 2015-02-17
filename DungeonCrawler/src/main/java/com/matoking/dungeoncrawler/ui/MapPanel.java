@@ -130,11 +130,12 @@ public class MapPanel extends JPanel {
     
     public void renderPlayer(Graphics g) {
         SpriteCache spriteCache = this.gameFrame.getSpriteCache();
+        Player player = this.gameState.getPlayer();
         
         int spriteX = (this.getRows() / 2) * Sprite.TILE_WIDTH;
         int spriteY = (this.getColumns() / 2) * Sprite.TILE_WIDTH;
         
-        g.drawImage(spriteCache.getImage("player"), spriteX, spriteY, Sprite.TILE_WIDTH, Sprite.TILE_HEIGHT, null);
+        g.drawImage(spriteCache.getImage(player.getImageName()), spriteX, spriteY, Sprite.TILE_WIDTH, Sprite.TILE_HEIGHT, null);
     }
     
     public int getRows() {

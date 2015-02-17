@@ -23,8 +23,8 @@ public class Skeleton implements Entity {
     private final static int DEFAULT_HEALTH = 50;
     private final static int DEFAULT_CHASE_STEP_COUNT = 10;
     
-    private final static int MIN_DAMAGE_TO_PLAYER = 4;
-    private final static int MAX_DAMAGE_TO_PLAYER = 8;
+    private final static int MIN_DAMAGE_TO_PLAYER = 2;
+    private final static int MAX_DAMAGE_TO_PLAYER = 5;
     
     private final static int ENEMY_AREA_RADIUS = 8;
     
@@ -181,7 +181,11 @@ public class Skeleton implements Entity {
             return false;
         }
         
-        return true;
+        // Check if the enemy can reach the player in five or less steps
+        // If so, consider player visible
+        this.gameState.getPathfinding().calculateShortestPath(new Coordinate(this.getX(), this.getY()), this.gameState.getPlayer().getCoordinate());
+        
+        return this.gameState.getPathfinding().getStepsToGoal() <= 5;
     }
     
     /**
@@ -195,7 +199,8 @@ public class Skeleton implements Entity {
         Coordinate playerCoordinate = new Coordinate(player.getX(), player.getY());
         Coordinate enemyCoordinate = new Coordinate(this.getX(), this.getY());
         
-        return this.gameState.getPathfinding().getNextStepTo(enemyCoordinate, playerCoordinate);
+        this.gameState.getPathfinding().calculateShortestPath(enemyCoordinate, playerCoordinate);
+        return this.gameState.getPathfinding().getNextStepToGoal();
     }
 
     /**

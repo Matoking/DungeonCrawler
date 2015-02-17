@@ -50,6 +50,15 @@ public class GameMessages {
     }
     
     /**
+     * Get a "restart game" message
+     * 
+     * @return Game log message as String
+     */
+    static public String getGameRestartMessage() {
+        return getMessageFromList("game_restart");
+    }
+    
+    /**
      * Get a "x keys remaining" message
      * 
      * @param keysRemaining Keys remaining

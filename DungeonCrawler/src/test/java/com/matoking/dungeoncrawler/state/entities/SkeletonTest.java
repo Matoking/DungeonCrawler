@@ -94,14 +94,13 @@ public class SkeletonTest {
         gameMap.addEntity(new Skeleton(this.gameState, 6, 6));
         gameMap.addEntity(new Skeleton(this.gameState, 4, 4));
         
-        assertEquals(this.gameState.getPlayer().getHealth(), 50);
+        assertEquals(50, this.gameState.getPlayer().getHealth());
         
         for (int i=0; i < 10; i++) {
             this.gameState.performMove(Direction.RIGHT);
         }
         
-        assertEquals(this.gameState.getPlayer().getHealth(), 0);
-        
+        assertEquals(0, this.gameState.getPlayer().getHealth());        
     }
     
 }

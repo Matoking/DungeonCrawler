@@ -1,5 +1,6 @@
 package com.matoking.dungeoncrawler.generator;
 
+import com.matoking.dungeoncrawler.state.Coordinate;
 import com.matoking.dungeoncrawler.state.TileType;
 import java.awt.Rectangle;
 
@@ -25,6 +26,18 @@ public class Room {
      */
     public boolean intersects(Room room) {
         return this.rectangle.intersects(room.getRectangle());
+    }
+    
+    /**
+     * Get a coordinate representing the center of this room
+     * 
+     * @return Center of the room as Coordinate
+     */
+    public Coordinate getCenterCoordinate() {
+        Coordinate coordinate = new Coordinate(this.getX() + (this.getWidth() / 2),
+                                               this.getY() + (this.getHeight() / 2));
+        
+        return coordinate;
     }
     
     public void setFloorType(TileType floorType) {

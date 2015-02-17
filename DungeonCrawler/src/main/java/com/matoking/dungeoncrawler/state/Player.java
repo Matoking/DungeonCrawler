@@ -122,4 +122,19 @@ public class Player {
         
         return random.nextInt(5) + 7;
     }
+    
+    /**
+     * Get the image name representing the player
+     * 
+     * @return Image name as String
+     */
+    public String getImageName() {
+        if (this.getHealth() == 0) {
+            return "player_lost";
+        } else if (this.getRemainingKeys() == 0) {
+            return "player_won";
+        } else {
+            return "player";
+        }
+    }
 }

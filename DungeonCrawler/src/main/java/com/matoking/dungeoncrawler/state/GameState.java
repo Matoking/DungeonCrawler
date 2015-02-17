@@ -29,13 +29,10 @@ public class GameState {
      * Starts a new game
      */
     public void startGame() {
-        this.gameMap = null;
         this.gameMap = new GameMap(this);
+        this.player = new Player(this.gameMap, 5, 5);
         
         this.mapGenerator.generateMap(GameMap.MAP_DEFAULT_WIDTH, GameMap.MAP_DEFAULT_HEIGHT);
-        
-        this.player = null;
-        this.player = new Player(this.gameMap, 5, 5);
         
         this.gameLog.clearMessages();
         
@@ -73,8 +70,10 @@ public class GameState {
         
         if (this.isGameLost()) {
             this.getGameLog().addMessage(GameMessages.getGameLostMessage());
+            this.getGameLog().addMessage(GameMessages.getGameRestartMessage());
         } else if (this.isGameWon()) {
             this.getGameLog().addMessage(GameMessages.getGameWonMessage());
+            this.getGameLog().addMessage(GameMessages.getGameRestartMessage());
         }
     }
     
