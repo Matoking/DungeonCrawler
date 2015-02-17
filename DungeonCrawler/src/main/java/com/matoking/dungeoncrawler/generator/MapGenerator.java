@@ -255,15 +255,8 @@ public class MapGenerator {
     public void addSkeletons() {
         for (int i=0; i < this.getSkeletonsToSpawn(); i++) {
             while (true) {
-                // Pick a random room
-                Room room = this.getRooms().get(this.random.nextInt(this.getRooms().size()));
-
-                // Pick a random coordinate inside the room
-                int x = this.random.nextInt(room.getWidth()) + room.getX();
-                int y = this.random.nextInt(room.getHeight()) + room.getY();
-
-                Coordinate coordinate = new Coordinate(x, y);
-
+                Coordinate coordinate = this.getRandomOpenCoordinate();
+                
                 if (!this.getSkeletons().contains(coordinate)) {
                     this.getSkeletons().add(coordinate);
                     break;
@@ -278,14 +271,7 @@ public class MapGenerator {
     public void addKeys() {
         for (int i=0; i < this.getKeysToSpawn(); i++) {
             while (true) {
-                // Pick a random room
-                Room room = this.getRooms().get(this.random.nextInt(this.getRooms().size()));
-
-                // Pick a random coordinate inside the room
-                int x = this.random.nextInt(room.getWidth()) + room.getX();
-                int y = this.random.nextInt(room.getHeight()) + room.getY();
-
-                Coordinate coordinate = new Coordinate(x, y);
+                Coordinate coordinate = this.getRandomOpenCoordinate();
 
                 if (!this.getKeys().contains(coordinate) && !this.getSkeletons().contains(coordinate)) {
                     this.getKeys().add(coordinate);
@@ -363,9 +349,32 @@ public class MapGenerator {
         }
     }
     
+    public void addRooms() {
+        
+    }
+    
+    /**
+     * Place the player inside one of the rooms
+     */
     public void placePlayer() {
         this.gameState.getPlayer().setRemainingKeys(this.getKeysToSpawn());
         
+        while (true) {
+            Coordinate coordinate = this.getRandomOpenCoordinate();
+
+            if (!this.getKeys().contains(coordinate) && !this.getSkeletons().contains(coordinate)) {
+                this.gameState.getPlayer().setCoordinate(coordinate);
+                break;
+            }
+        }
+    }
+    
+    /**
+     * Get random coordinate that's inside one of the rooms and isn't occupied
+     * by any other entity
+     * @return 
+     */
+    public Coordinate getRandomOpenCoordinate() {
         while (true) {
             // Pick a random room
             Room room = this.getRooms().get(this.random.nextInt(this.getRooms().size()));
@@ -377,9 +386,7 @@ public class MapGenerator {
             Coordinate coordinate = new Coordinate(x, y);
 
             if (!this.getKeys().contains(coordinate) && !this.getSkeletons().contains(coordinate)) {
-                this.gameState.getPlayer().setX(x);
-                this.gameState.getPlayer().setY(y);
-                break;
+                return new Coordinate(x, y);
             }
         }
     }

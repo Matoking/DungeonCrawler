@@ -48,6 +48,7 @@ public class GameMessagesTest {
         assertEquals(true, GameMessages.getPlayerKillsSkeleton(5).length() > 5);
         assertEquals(true, GameMessages.getSkeletonEndsChase().length() > 5);
         assertEquals(true, GameMessages.getSkeletonStartsChase().length() > 5);
+        assertEquals(true, GameMessages.getGameRestartMessage().length() > 5);
     }
     
     @Test

@@ -1,15 +1,13 @@
 package com.matoking.dungeoncrawler.generator;
 
-import com.matoking.dungeoncrawler.generator.MapGenerator;
-import com.matoking.dungeoncrawler.generator.Room;
+import com.matoking.dungeoncrawler.state.Coordinate;
+import com.matoking.dungeoncrawler.state.Direction;
 import com.matoking.dungeoncrawler.state.GameMap;
 import com.matoking.dungeoncrawler.state.GameState;
 import com.matoking.dungeoncrawler.state.TileType;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -24,22 +22,10 @@ public class MapGeneratorTest {
     public MapGeneratorTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         this.gameState = new GameState();
         this.mapGenerator = new MapGenerator(this.gameState);
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     public void testMaximumRoomsGenerated() {
@@ -97,6 +83,72 @@ public class MapGeneratorTest {
         
         assertEquals(this.gameState.getGameMap().getWidth(), 512);
         assertEquals(this.gameState.getGameMap().getHeight(), 1024);
+    }
+    
+    /**
+     * Tests that all entities generated on the map can be reached
+     */
+    @Test
+    public void testMapEntitiesReachable() {
+        for (int i=0; i < 10; i++) {
+            this.mapGenerator.generateMap(48, 48);
+
+            GameMap gameMap = this.gameState.getGameMap();
+
+            ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+            ArrayDeque<Coordinate> queue = new ArrayDeque<Coordinate>();
+
+            Coordinate first = this.mapGenerator.getRooms().get(0).getCenterCoordinate();
+
+            queue.push(first);
+
+            int skeletonCount = 0;
+            int keyCount = 0;
+
+            while (true) {
+                if (queue.isEmpty()) {
+                    break;
+                }
+
+                Coordinate coordinate = queue.pop(); 
+
+                if (coordinates.contains(coordinate)) {
+                    continue;
+                }
+
+                coordinates.add(coordinate);
+
+                if (this.mapGenerator.getKeys().contains(coordinate)) {
+                    keyCount++;
+                }
+
+                if (this.mapGenerator.getSkeletons().contains(coordinate)) {
+                    skeletonCount++;
+                }
+
+                for (Direction direction : Direction.values()) {
+                    Coordinate newCoordinate = Coordinate.getNewCoordinates(direction, coordinate.getX(),
+                                                                                       coordinate.getY());
+
+                    if (gameMap.getTileType(newCoordinate.getX(), newCoordinate.getY()) != TileType.WALL && !coordinates.contains(newCoordinate)) {
+                        queue.push(newCoordinate);
+                    }
+                }
+            }
+
+            assertEquals(this.mapGenerator.getKeys().size(), keyCount);
+            assertEquals(this.mapGenerator.getSkeletons().size(), skeletonCount);
+        }
+    }
+    
+    @Test
+    public void testRandomOpenCoordinateIsAFloorTile() {
+        this.mapGenerator.generateMap(64, 64);
+        
+        Coordinate coordinate = this.mapGenerator.getRandomOpenCoordinate();
+        TileType tileType = this.gameState.getGameMap().getTileType(coordinate);
+        
+        assertEquals(tileType == TileType.STONE_FLOOR || tileType == TileType.WOODEN_FLOOR, true);
     }
     
 }

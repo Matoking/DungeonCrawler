@@ -95,6 +95,10 @@ public class GameMap {
         }
     }
     
+    public TileType getTileType(Coordinate coordinate) {
+        return this.getTileType(coordinate.getX(), coordinate.getY());
+    }
+    
     /**
      * Is the tile blocked by an immovable object such as a wall
      * 

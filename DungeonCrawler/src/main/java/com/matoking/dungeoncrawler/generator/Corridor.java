@@ -54,7 +54,7 @@ public class Corridor {
         if ((int) this.getRectangle().getWidth() == 0) {
             return 1;
         } else {
-            return (int) this.getRectangle().getWidth();
+            return (int)this.getRectangle().getWidth() + 1;
         }
     }
 
@@ -62,7 +62,7 @@ public class Corridor {
         if ((int) this.getRectangle().getHeight() == 0) {
             return 1;
         } else {
-            return (int) this.getRectangle().getHeight();
+            return (int)this.getRectangle().getHeight() + 1;
         }
     }
 }

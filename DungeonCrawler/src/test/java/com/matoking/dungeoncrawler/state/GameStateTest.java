@@ -67,7 +67,7 @@ public class GameStateTest {
     }
     
     @Test
-    public void playerInteractsWithNonSolidEntity() {
+    public void testPlayerInteractsWithNonSolidEntity() {
         this.gameState.getPlayer().setX(5);
         this.gameState.getPlayer().setY(5);
         this.gameState.getPlayer().setRemainingKeys(2);
@@ -82,6 +82,24 @@ public class GameStateTest {
         
         assertEquals(this.gameState.getGameMap().getEntities().size(), 0);
         assertEquals(this.gameState.getPlayer().getRemainingKeys(), 1);
+    }
+    
+    @Test
+    public void testGameIsWonWhenPlayerHasNoRemainingKeys() {
+        assertEquals(false, this.gameState.isGameWon());
+        
+        this.gameState.getPlayer().setRemainingKeys(0);
+        
+        assertEquals(true, this.gameState.isGameWon());
+    }
+    
+    @Test
+    public void testGameIsLostWhenHealthIsZero() {
+        assertEquals(false, this.gameState.isGameLost());
+        
+        this.gameState.getPlayer().setHealth(0);
+        
+        assertEquals(true, this.gameState.isGameLost());
     }
     
 }

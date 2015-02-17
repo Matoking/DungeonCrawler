@@ -20,6 +20,8 @@ public class Coordinate implements Comparable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 97 * hash + this.x;
+        hash = 97 * hash + this.y;
         return hash;
     }
 
@@ -103,5 +105,10 @@ public class Coordinate implements Comparable {
         Coordinate comp = (Coordinate)t;
         
         return Integer.compare(this.getWeight(), comp.getWeight());
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" + "x=" + x + ", y=" + y + '}';
     }
 }

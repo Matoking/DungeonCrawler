@@ -70,6 +70,11 @@ public class Player {
         this.y = y;
     }
     
+    public void setCoordinate(Coordinate coordinate) {
+        this.setX(coordinate.getX());
+        this.setY(coordinate.getY());
+    }
+    
     /**
      * Returns player's position as a Coordinate
      * 

@@ -77,6 +77,23 @@ public class SkeletonTest {
     }
     
     @Test
+    public void testSkeletonWillHurtPlayer() {
+        GameMap gameMap = this.gameState.getGameMap();
+        this.gameState.getPlayer().setX(5);
+        this.gameState.getPlayer().setY(5);
+        
+        gameMap.addEntity(new Skeleton(this.gameState, 6, 5));
+        
+        assertEquals(50, this.gameState.getPlayer().getHealth());
+        
+        // Skeleton should harm player after one turn
+        this.gameState.performMove(Direction.RIGHT);
+        this.gameState.performMove(Direction.RIGHT);
+        
+        assertEquals(true, this.gameState.getPlayer().getHealth() < 50);
+    }
+    
+    @Test
     public void testPlayerWillBeKilledWhenFacedWithAnUnsurmountableArmyOfSkeletons() {
         // Basically, spawn a bunch of skeletons within player's range
         // Common sense states player will be killed within ten turns
@@ -93,10 +110,14 @@ public class SkeletonTest {
         gameMap.addEntity(new Skeleton(this.gameState, 6, 6));
         gameMap.addEntity(new Skeleton(this.gameState, 6, 6));
         gameMap.addEntity(new Skeleton(this.gameState, 4, 4));
+        gameMap.addEntity(new Skeleton(this.gameState, 6, 6));
+        gameMap.addEntity(new Skeleton(this.gameState, 7, 7));
+        gameMap.addEntity(new Skeleton(this.gameState, 7, 6));
+        gameMap.addEntity(new Skeleton(this.gameState, 6, 7));
         
         assertEquals(50, this.gameState.getPlayer().getHealth());
         
-        for (int i=0; i < 10; i++) {
+        for (int i=0; i < 20; i++) {
             this.gameState.performMove(Direction.RIGHT);
         }
         

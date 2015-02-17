@@ -25,30 +25,18 @@ public class PathfindingTest {
     public PathfindingTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         this.gameState = new GameState();
         
-        this.pathfinding = new Pathfinding(this.gameState);
+        this.pathfinding = this.gameState.getPathfinding();
         this.gameMap = this.gameState.getGameMap();
-    }
-    
-    @After
-    public void tearDown() {
     }
     
     @Test
     public void testCoordinateConversionToInt() {
-        for (int x = 0; x < 64; x++) {
-            for (int y = 0; y < 64; y++) {
+        for (int x = 0; x < this.gameMap.getWidth(); x++) {
+            for (int y = 0; y < this.gameMap.getHeight(); y++) {
                 int converted = this.pathfinding.convertToInt(x, y);
                 Coordinate coordinate = this.pathfinding.convertFromInt(converted);
                 
@@ -71,7 +59,7 @@ public class PathfindingTest {
         
         for (int x=0; x < 6; x++) {
             for (int y=0; y < 10; y++) {
-                this.gameMap.setTile(x, y, map[x][y] == 0 ? TileType.WOODEN_FLOOR : TileType.WALL);
+                this.gameMap.setTile(y, x, map[x][y] == 0 ? TileType.WOODEN_FLOOR : TileType.WALL);
             }
         }
         
@@ -79,7 +67,7 @@ public class PathfindingTest {
         Coordinate firstStep = this.pathfinding.getNextStepToGoal();
         
         // First step is on the right
-        assertEquals(new Coordinate(1, 2), firstStep);
+        assertEquals(new Coordinate(2, 1), firstStep);
     }
     
     @Test
@@ -95,14 +83,14 @@ public class PathfindingTest {
         
         for (int x=0; x < 6; x++) {
             for (int y=0; y < 10; y++) {
-                this.gameMap.setTile(x, y, map[x][y] == 0 ? TileType.WOODEN_FLOOR : TileType.WALL);
+                this.gameMap.setTile(y, x, map[x][y] == 0 ? TileType.WOODEN_FLOOR : TileType.WALL);
             }
         }
         
         this.pathfinding.calculateShortestPath(new Coordinate(1, 1), new Coordinate(6, 1));
         
         // 15 steps to reach the goal
-        assertEquals(this.pathfinding.getStepsToGoal(), 15);
+        assertEquals(15, this.pathfinding.getStepsToGoal());
     }
     
 }

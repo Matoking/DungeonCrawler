@@ -37,9 +37,6 @@ public class CoordinateTest {
     public void tearDown() {
     }
     
-    /**
-     * Test that coordinates are converted correctly for each direction
-     */
     @Test
     public void testCoordinateConversion() {
         // 0,0 to right

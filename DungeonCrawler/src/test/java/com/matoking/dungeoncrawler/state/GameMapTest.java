@@ -89,6 +89,12 @@ public class GameMapTest {
         
         this.gameMap.setTile(5, 5, TileType.STONE_FLOOR);
         assertEquals("stone_floor", this.gameMap.getTile(5, 5).getImageName());
+        
+        this.gameMap.setTile(5, 5, TileType.STONE_CORRIDOR_FLOOR);
+        assertEquals("stone_corridor_floor", this.gameMap.getTile(5, 5).getImageName());
+        
+        this.gameMap.setTile(5, 5, TileType.WOODEN_CORRIDOR_FLOOR);
+        assertEquals("wooden_corridor_floor", this.gameMap.getTile(5, 5).getImageName());
     }
     
     @Test
