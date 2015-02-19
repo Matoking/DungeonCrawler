@@ -3,7 +3,7 @@ package com.matoking.dungeoncrawler.state;
 import java.util.Random;
 
 /**
- * The main Player class
+ * Player class containing player's position, health and remaining keys
  * 
  * @author matoking
  */

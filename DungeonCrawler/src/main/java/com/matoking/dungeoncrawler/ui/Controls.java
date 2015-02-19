@@ -24,6 +24,10 @@ public class Controls implements KeyListener {
     @Override
     public void keyReleased(KeyEvent ke) { }
     
+    /**
+     * Responds to player's key presses
+     * @param ke 
+     */
     @Override
     public void keyPressed(KeyEvent ke) {
         GameState gameState = this.gameFrame.getGameState();

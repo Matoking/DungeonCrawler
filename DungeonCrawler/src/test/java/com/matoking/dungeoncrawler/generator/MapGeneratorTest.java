@@ -136,6 +136,7 @@ public class MapGeneratorTest {
                 }
             }
 
+            // Check that the correct number of skeletons and keys were generated
             assertEquals(this.mapGenerator.getKeys().size(), keyCount);
             assertEquals(this.mapGenerator.getSkeletons().size(), skeletonCount);
         }

@@ -49,7 +49,10 @@ public class SpriteCache {
     /**
      * Loads the requested image and resizes it by the given factor
      * 
+     * @param imageName Image name to load
+     * @param factor The zoom factor, eg. factor of 2 makes the image's resolution twice as large
      * 
+     * @return Resized image as a BufferedImage, null if image couldn't be loaded
      */
     public BufferedImage getResizedImage(String imageName, int factor) {
         BufferedImage image = this.getImage(imageName);

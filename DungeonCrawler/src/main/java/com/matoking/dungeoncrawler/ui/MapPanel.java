@@ -72,7 +72,7 @@ public class MapPanel extends JPanel {
     /**
      * Renders the tile
      * 
-     * @param g
+     * @param g Graphics to draw to
      * @param x X-coordinate of the tile in the visible map grid
      * @param y Y-coordinate of the tile in the visible map grid
      */
@@ -104,6 +104,8 @@ public class MapPanel extends JPanel {
     
     /**
      * Render entities in the view 
+     * 
+     * @param g Graphics to draw to
      */
     public void renderEntities(Graphics g) {
         ArrayList<Entity> entities = this.gameState.getGameMap().getEntities();
@@ -128,6 +130,11 @@ public class MapPanel extends JPanel {
         }
     }
     
+    /**
+     * Render the player on the center
+     * 
+     * @param g Graphics to draw to
+     */
     public void renderPlayer(Graphics g) {
         SpriteCache spriteCache = this.gameFrame.getSpriteCache();
         Player player = this.gameState.getPlayer();

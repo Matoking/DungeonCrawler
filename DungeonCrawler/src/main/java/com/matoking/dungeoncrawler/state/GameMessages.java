@@ -95,7 +95,7 @@ public class GameMessages {
      * 
      * @param damage How much damage skeleton dealt to the player
      * 
-     * @return 
+     * @return Game log message as String
      */
     static public String getSkeletonHitsPlayer(int damage) {
         return String.format(getMessageFromList("skeleton_hits_player"), damage);

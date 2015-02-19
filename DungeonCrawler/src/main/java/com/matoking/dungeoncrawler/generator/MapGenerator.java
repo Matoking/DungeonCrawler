@@ -66,6 +66,12 @@ public class MapGenerator {
         this.random = new Random();
     }
 
+    /**
+     * Generate and load a map into the game with the provided width and height
+     * 
+     * @param width Width of the game map
+     * @param height Height of the game map
+     */
     public void generateMap(int width, int height) {
         this.width = width;
         this.height = height;
@@ -285,6 +291,17 @@ public class MapGenerator {
      * Load the generated map in to the game
      */
     public void loadMap() {
+        this.loadRooms();
+        this.loadCorridors();
+        this.loadWalls();
+        this.loadSkeletons();
+        this.loadKeys();
+    }
+    
+    /**
+     * Load generated rooms into the game
+     */
+    public void loadRooms() {
         GameMap gameMap = this.gameState.getGameMap();
         
         // First pass: add the rooms
@@ -296,8 +313,14 @@ public class MapGenerator {
                 }
             }
         }
+    }
+    
+    /**
+     * Load generated corridors into the game
+     */
+    public void loadCorridors() {
+        GameMap gameMap = this.gameState.getGameMap();
         
-        // Second pass: add the corridors
         for (Corridor corridor : this.getCorridors()) {
             for (int x=corridor.getX(); x < corridor.getX() + corridor.getWidth(); x++) {
                 for (int y=corridor.getY(); y < corridor.getY() + corridor.getHeight(); y++) {
@@ -307,8 +330,14 @@ public class MapGenerator {
                 }
             }
         }
+    }
+    
+    /**
+     * Add walls to the loaded map layout
+     */
+    public void loadWalls() {
+        GameMap gameMap = this.gameState.getGameMap();
         
-        // Third pass: add the walls
         for (int x=0; x < gameMap.getWidth(); x++) {
             for (int y=0; y < gameMap.getHeight(); y++) {
                 if (gameMap.getTileType(x, y) != TileType.EMPTY) {
@@ -337,20 +366,28 @@ public class MapGenerator {
                 }
             }
         }
+    }
+    
+    /**
+     * Add generated skeletons into the game
+     */
+    public void loadSkeletons() {
+        GameMap gameMap = this.gameState.getGameMap();
         
-        // Fourth pass: add the skeletons
         for (Coordinate skeleton : this.getSkeletons()) {
             gameMap.addEntity(new Skeleton(this.gameState, skeleton.getX(), skeleton.getY()));
         }
+    }
+    
+    /**
+     * Add generated keys into the game
+     */
+    public void loadKeys() {
+        GameMap gameMap = this.gameState.getGameMap();
         
-        // Fifth pass: add the keys
         for (Coordinate key : this.getKeys()) {
             gameMap.addEntity(new Key(this.gameState, key.getX(), key.getY()));
         }
-    }
-    
-    public void addRooms() {
-        
     }
     
     /**
@@ -372,7 +409,8 @@ public class MapGenerator {
     /**
      * Get random coordinate that's inside one of the rooms and isn't occupied
      * by any other entity
-     * @return 
+     * 
+     * @return Return random Coordinate that's inside one of the rooms
      */
     public Coordinate getRandomOpenCoordinate() {
         while (true) {
@@ -410,7 +448,7 @@ public class MapGenerator {
     /**
      * Check if the room is within valid bounds
      * 
-     * @return 
+     * @return true if room is within bounds, false if it isn't
      */
     private boolean isRoomWithinValidBounds(Room room) {
         if (room.getX() < 1 || (room.getX() + room.getWidth()) >= this.getWidth()-1 ||

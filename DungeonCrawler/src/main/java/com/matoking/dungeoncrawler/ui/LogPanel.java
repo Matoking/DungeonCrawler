@@ -67,7 +67,7 @@ public class LogPanel extends JPanel {
     }
     
     /**
-     * Update the text area
+     * Update the text area to show the most recent game log messages
      */
     public void update() {
         ArrayList<String> messages = this.gameState.getGameLog().getMessages();

@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 /**
- * Class responsible for doing pathfinding. Uses Dijkstra's algorithm,
- * though A* could be more ideal
+ * Class responsible for doing pathfinding. Uses Dijkstra's algorithm.
  * 
  * @author matoking
  */

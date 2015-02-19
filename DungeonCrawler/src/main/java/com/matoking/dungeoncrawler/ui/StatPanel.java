@@ -47,6 +47,9 @@ public class StatPanel extends JPanel {
         this.update();
     }
     
+    /**
+     * Updates player's stats
+     */
     public void update() {
         this.healthLabel.setText(String.format("%d", this.gameState.getPlayer().getHealth()));
     }

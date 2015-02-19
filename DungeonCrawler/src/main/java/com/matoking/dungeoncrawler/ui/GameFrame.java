@@ -3,6 +3,11 @@ package com.matoking.dungeoncrawler.ui;
 import com.matoking.dungeoncrawler.state.GameState;
 import javax.swing.JFrame;
 
+/**
+ * Game frame containing all of the UI elements
+ * 
+ * @author matoking
+ */
 public class GameFrame extends JFrame {
     public static final int SIDE_PANEL_WIDTH = 400;
     
@@ -49,7 +54,7 @@ public class GameFrame extends JFrame {
     }
     
     /**
-     * Updates panels which need to be explicitly called
+     * Updates panels and the information displayed on them
      */
     public void update() {
         this.logPanel.update();

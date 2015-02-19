@@ -37,6 +37,11 @@ public class Tile {
         return type;
     }
     
+    /**
+     * Is this tile a floor tile (eg. it can be walked on)
+     * 
+     * @return true if tile is a floor tile, false if it isn't
+     */
     public boolean isFloor() {
         if (this.getType() == TileType.STONE_FLOOR || this.getType() == TileType.WOODEN_FLOOR ||
             this.getType() == TileType.STONE_CORRIDOR_FLOOR || this.getType() == TileType.WOODEN_CORRIDOR_FLOOR) {
@@ -46,6 +51,11 @@ public class Tile {
         }
     }
     
+    /**
+     * Returns the name of the image representing this tile. Used for rendering.
+     * 
+     * @return Tile's image name as tile, "empty" if nothing should be rendered
+     */
     public String getImageName() {
         switch (this.getType()) {
             case WALL:

@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 
 /**
- * A class representing corridors which connect rooms
+ * A class representing corridors which connect rooms. Corridors are one tile wide
  *
  * @author matoking
  */

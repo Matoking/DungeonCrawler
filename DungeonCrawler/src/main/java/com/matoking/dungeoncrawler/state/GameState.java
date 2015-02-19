@@ -4,7 +4,8 @@ import com.matoking.dungeoncrawler.generator.MapGenerator;
 import java.util.ArrayList;
 
 /**
- * The main class containing the game's state: GameMap, GameLog, Player
+ * The main class containing the game's state, as well as helper utilities for
+ * pathfinding and map generation
  */
 public class GameState {
     private GameMap gameMap;
@@ -58,8 +59,19 @@ public class GameState {
             entities = this.gameMap.getEntitiesAt(this.player.getX(), this.player.getY());
         }
         
+        this.updateEntities(entities);
+        
+        this.checkGameState();
+    }
+    
+    /**
+     * Run onPlayerTouch() on any entities player may have touched. After that, run step() on all of game's entities
+     * 
+     * @param touchedEntities Entities that player touched
+     */
+    public void updateEntities(ArrayList<Entity> touchedEntities) {
         // First, make player interact with any possible entities he's touching
-        for (Entity entity : entities) {
+        for (Entity entity : touchedEntities) {
             entity.onPlayerTouch();
         }
         
@@ -67,7 +79,12 @@ public class GameState {
         for (Entity entity : this.getGameMap().getEntities()) {
             entity.step();
         }
-        
+    }
+    
+    /**
+     * Check if player has either won or lost the game. If he has, display a relevant message
+     */
+    public void checkGameState() {
         if (this.isGameLost()) {
             this.getGameLog().addMessage(GameMessages.getGameLostMessage());
             this.getGameLog().addMessage(GameMessages.getGameRestartMessage());
@@ -78,8 +95,7 @@ public class GameState {
     }
     
     /**
-     * Check if the player has won the game. In case he has, display a victory message
-     * and prevent the player from moving
+     * Check if the player has won the game
      */
     public boolean isGameWon() {
         if (this.getPlayer().getRemainingKeys() == 0) {

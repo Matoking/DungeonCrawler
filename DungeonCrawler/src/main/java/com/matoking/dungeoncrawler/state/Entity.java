@@ -10,7 +10,8 @@ public interface Entity {
     public int getY();
     
     /**
-     * Can other entities/player move on top of this entity?
+     * Boolean representing whether the entity is solid, eg. other entities can't 
+     * move on top of it
      * 
      * @return Is this entity an obstacle
      */
