@@ -15,6 +15,9 @@ FUNCTIONS
 * Keys
   - player picks up keys placed around the map by walking over them
   - the game is won when all keys have been picked up
-* Various other items(?)
-  - swords that improve player's damage
-  - apples that restore player's health
+* Game log
+  - displays messages related to game events, such as player attacking an enemy or picking up a key
+* Apples
+  - Apples that restore player's health
+* Map generator
+  - Generates a different map for each game
