@@ -2,3 +2,4 @@
 <b style='color: red;'>Game over.</b>
 <b style='color: red;'>Fission mailed.</b>
 <b style='color: red;'>You've met with a terrible fate, haven't you?</b>
+<b style='color: red;'>Annihilated.</b>

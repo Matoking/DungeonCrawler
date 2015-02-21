@@ -25,7 +25,9 @@ public class Key implements Entity {
 
     // The key won't block anything on the map
     @Override
-    public boolean isObstacle() { return false; }
+    public boolean isObstacle() { 
+        return false; 
+    }
 
     // The key won't move once placed
     @Override
@@ -37,7 +39,10 @@ public class Key implements Entity {
         this.gameState.getPlayer().decreaseKeys(1);
         this.gameState.getGameMap().removeEntity(this);
         this.gameState.getGameLog().addMessage(GameMessages.getKeyPickupMessage());
-        this.gameState.getGameLog().addMessage(GameMessages.getKeysRemainingMessage(this.gameState.getPlayer().getRemainingKeys()));
+        
+        if (this.gameState.getPlayer().getRemainingKeys() != 0) {
+            this.gameState.getGameLog().addMessage(GameMessages.getKeysRemainingMessage(this.gameState.getPlayer().getRemainingKeys()));
+        }
     }
 
     @Override

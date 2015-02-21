@@ -120,6 +120,17 @@ public class GameMessages {
     }
     
     /**
+     * Get a "player picked up apple" message
+     * 
+     * @param restoredHealth How much health the apple restored
+     * 
+     * @return Game log message as String
+     */
+    static public String getApplePickupMessage(int restoredHealth) {
+        return String.format(getMessageFromList("apple_pickup"), restoredHealth);
+    }
+    
+    /**
      * Get a random message from the provided list, which is loaded from a
      * text file of the same name
      * 

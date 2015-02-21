@@ -104,6 +104,7 @@ public class MapGeneratorTest {
 
             int skeletonCount = 0;
             int keyCount = 0;
+            int appleCount = 0;
 
             while (true) {
                 if (queue.isEmpty()) {
@@ -125,6 +126,10 @@ public class MapGeneratorTest {
                 if (this.mapGenerator.getSkeletons().contains(coordinate)) {
                     skeletonCount++;
                 }
+                
+                if (this.mapGenerator.getApples().contains(coordinate)) {
+                    appleCount++;
+                }
 
                 for (Direction direction : Direction.values()) {
                     Coordinate newCoordinate = Coordinate.getNewCoordinates(direction, coordinate.getX(),
@@ -136,9 +141,10 @@ public class MapGeneratorTest {
                 }
             }
 
-            // Check that the correct number of skeletons and keys were generated
+            // Check that the correct number of entities were generated
             assertEquals(this.mapGenerator.getKeys().size(), keyCount);
             assertEquals(this.mapGenerator.getSkeletons().size(), skeletonCount);
+            assertEquals(this.mapGenerator.getApples().size(), appleCount);
         }
     }
     

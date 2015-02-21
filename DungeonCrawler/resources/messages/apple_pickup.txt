@@ -1,0 +1,4 @@
+# %1$d = health recovered
+You pick up the apple and eat it in one fell swoop, instantly recovering <b style="color: green;">%1$d</b> health.
+You pick up the apple and jam it down your throat, deftly avoiding suffocation and recovering <b style="color: green;">%1$d</b> health.
+You devour the apple without difficulty, recovering <b style="color: green;">%1$d</b> health.

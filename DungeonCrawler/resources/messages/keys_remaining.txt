@@ -1,3 +1,4 @@
 # %1$d = keys remaining
-Only <b>%1$d</b> more <b style='color: yellow;'>keys</b> to go!
-<b>%1$d</b> <b style='color: yellow;'>golden keys</b> remaining.
+Only <b>%1$d</b> more <b style='color: yellow;'>key(s)</b> to go!
+<b>%1$d</b> <b style='color: yellow;'>golden key(s)</b> remaining.
+Only <b>%1$d</b> more <b style='color: yellow;'>key(s)</b> and you've won the game!

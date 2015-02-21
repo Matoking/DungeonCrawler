@@ -6,6 +6,7 @@ import com.matoking.dungeoncrawler.state.GameMap;
 import com.matoking.dungeoncrawler.state.GameState;
 import com.matoking.dungeoncrawler.state.Tile;
 import com.matoking.dungeoncrawler.state.TileType;
+import com.matoking.dungeoncrawler.state.entities.Apple;
 import com.matoking.dungeoncrawler.state.entities.Key;
 import com.matoking.dungeoncrawler.state.entities.Skeleton;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class MapGenerator {
     // Default values
     private final static int DEFAULT_KEY_COUNT = 5;
     private final static int DEFAULT_SKELETON_COUNT = 5;
+    private final static int DEFAULT_APPLE_COUNT = 3;
     
     private final static int DEFAULT_ROOM_COUNT = 20;
 
@@ -38,6 +40,8 @@ public class MapGenerator {
 
     private int skeletonsToSpawn;
     private int keysToSpawn;
+    private int applesToSpawn;
+    
     private int roomsToGenerate;
     
     private ArrayList<Room> rooms;
@@ -47,6 +51,7 @@ public class MapGenerator {
     
     private ArrayList<Coordinate> skeletons;
     private ArrayList<Coordinate> keys;
+    private ArrayList<Coordinate> apples;
     
     private Random random;
 
@@ -55,6 +60,8 @@ public class MapGenerator {
         
         this.skeletonsToSpawn = DEFAULT_SKELETON_COUNT;
         this.keysToSpawn = DEFAULT_KEY_COUNT;
+        this.applesToSpawn = DEFAULT_APPLE_COUNT;
+        
         this.roomsToGenerate = DEFAULT_ROOM_COUNT;
         
         this.rooms = new ArrayList<Room>();
@@ -62,6 +69,7 @@ public class MapGenerator {
         
         this.skeletons = new ArrayList<Coordinate>();
         this.keys = new ArrayList<Coordinate>();
+        this.apples = new ArrayList<Coordinate>();
         
         this.random = new Random();
     }
@@ -81,6 +89,7 @@ public class MapGenerator {
         
         this.keys.clear();
         this.skeletons.clear();
+        this.apples.clear();
         
         this.rooms.clear();
         this.corridors.clear();
@@ -91,6 +100,7 @@ public class MapGenerator {
         
         this.addSkeletons();
         this.addKeys();
+        this.addApples();
         
         this.loadMap();
         this.placePlayer();
@@ -260,14 +270,8 @@ public class MapGenerator {
      */
     public void addSkeletons() {
         for (int i=0; i < this.getSkeletonsToSpawn(); i++) {
-            while (true) {
-                Coordinate coordinate = this.getRandomOpenCoordinate();
-                
-                if (!this.getSkeletons().contains(coordinate)) {
-                    this.getSkeletons().add(coordinate);
-                    break;
-                }
-            }
+            Coordinate coordinate = this.getRandomOpenCoordinate();
+            this.getSkeletons().add(coordinate);
         }
     }
     
@@ -276,14 +280,18 @@ public class MapGenerator {
      */
     public void addKeys() {
         for (int i=0; i < this.getKeysToSpawn(); i++) {
-            while (true) {
-                Coordinate coordinate = this.getRandomOpenCoordinate();
-
-                if (!this.getKeys().contains(coordinate) && !this.getSkeletons().contains(coordinate)) {
-                    this.getKeys().add(coordinate);
-                    break;
-                }
-            }
+            Coordinate coordinate = this.getRandomOpenCoordinate();
+            this.getKeys().add(coordinate);
+        }
+    }
+    
+    /**
+     * Add apples for player to collect
+     */
+    public void addApples() {
+        for (int i=0; i < this.getApplesToSpawn(); i++) {
+            Coordinate coordinate = this.getRandomOpenCoordinate();
+            this.getApples().add(coordinate);
         }
     }
     
@@ -294,8 +302,10 @@ public class MapGenerator {
         this.loadRooms();
         this.loadCorridors();
         this.loadWalls();
+        
         this.loadSkeletons();
         this.loadKeys();
+        this.loadApples();
     }
     
     /**
@@ -391,19 +401,24 @@ public class MapGenerator {
     }
     
     /**
+     * Add generated apples into the game
+     */
+    public void loadApples() {
+        GameMap gameMap = this.gameState.getGameMap();
+        
+        for (Coordinate apple : this.getApples()) {
+            gameMap.addEntity(new Apple(this.gameState, apple.getX(), apple.getY()));
+        }
+    }
+    
+    /**
      * Place the player inside one of the rooms
      */
     public void placePlayer() {
         this.gameState.getPlayer().setRemainingKeys(this.getKeysToSpawn());
         
-        while (true) {
-            Coordinate coordinate = this.getRandomOpenCoordinate();
-
-            if (!this.getKeys().contains(coordinate) && !this.getSkeletons().contains(coordinate)) {
-                this.gameState.getPlayer().setCoordinate(coordinate);
-                break;
-            }
-        }
+        Coordinate coordinate = this.getRandomOpenCoordinate();
+        this.gameState.getPlayer().setCoordinate(coordinate);
     }
     
     /**
@@ -474,6 +489,14 @@ public class MapGenerator {
     public void setKeysToSpawn(int keysToSpawn) {
         this.keysToSpawn = keysToSpawn;
     }
+
+    public int getApplesToSpawn() {
+        return applesToSpawn;
+    }
+
+    public void setApplesToSpawn(int applesToSpawn) {
+        this.applesToSpawn = applesToSpawn;
+    }
     
     public int getRoomsToGenerate() {
         return roomsToGenerate;
@@ -517,5 +540,9 @@ public class MapGenerator {
 
     public ArrayList<Coordinate> getKeys() {
         return keys;
+    }
+
+    public ArrayList<Coordinate> getApples() {
+        return apples;
     }
 }

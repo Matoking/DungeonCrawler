@@ -101,10 +101,24 @@ public class Player {
         return health;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setHealth(int amount) {
+        this.health = amount;
+    }
+
+    /**
+     * Increases player's health by provided amount. There is no upper limit.
+     * 
+     * @param amount Amount of health to restore
+     */
+    public void increaseHealth(int amount) {
+        this.health += amount;
     }
     
+    /**
+     * Decreases player's health by provided amount, making sure it doesn't go below 0
+     * 
+     * @param amount Amount of health to decrease
+     */
     public void decreaseHealth(int amount) {
         this.health -= amount;
         
@@ -113,6 +127,11 @@ public class Player {
         }
     }
     
+    /**
+     * Decreases player's remaining amount of keys
+     * 
+     * @param amount Amount of remaining keys to decrease
+     */
     public void decreaseKeys(int amount) {
         this.remainingKeys -= amount;
     }

@@ -7,7 +7,10 @@ package com.matoking.dungeoncrawler.state.entities;
 
 import com.matoking.dungeoncrawler.state.Direction;
 import com.matoking.dungeoncrawler.state.GameState;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -15,10 +18,10 @@ import static org.junit.Assert.*;
  *
  * @author matoking
  */
-public class KeyTest {
+public class AppleTest {
     public GameState gameState;
     
-    public KeyTest() {
+    public AppleTest() {
     }
     
     @Before
@@ -26,35 +29,37 @@ public class KeyTest {
         this.gameState = new GameState();
     }
     
+    @After
+    public void tearDown() {
+    }
+
     @Test
-    public void testPlayerPicksUpKey() {
+    public void testPlayerRestoresHealthOnApplePickup() {
         this.gameState.getPlayer().setX(5);
         this.gameState.getPlayer().setY(5);
-        this.gameState.getPlayer().setRemainingKeys(2);
         
-        this.gameState.getGameMap().addEntity(new Key(this.gameState, 5, 6));
+        this.gameState.getGameMap().addEntity(new Apple(this.gameState, 5, 6));
         
-        assertEquals(this.gameState.getPlayer().getRemainingKeys(), 2);
-
-        // When player moves down, he should pick up the key and remove
-        // the entity representing the key
+        assertEquals(50, this.gameState.getPlayer().getHealth());
+        
         this.gameState.performMove(Direction.DOWN);
         
-        assertEquals(this.gameState.getGameMap().getEntities().size(), 0);
-        assertEquals(this.gameState.getPlayer().getRemainingKeys(), 1);
+        // Apple restores 25 health
+        assertEquals(75, this.gameState.getPlayer().getHealth());
     }
     
     @Test
-    public void testPickingUpKeyDisplaysMessages() {
+    public void testPickingUpAppleDisplaysMessage() {
         this.gameState.getPlayer().setX(5);
         this.gameState.getPlayer().setY(5);
         
-        this.gameState.getGameMap().addEntity(new Key(this.gameState, 6, 5));
+        this.gameState.getGameMap().addEntity(new Apple(this.gameState, 5, 6));
         
         assertEquals(0, this.gameState.getGameLog().getMessages().size());
         
-        this.gameState.performMove(Direction.RIGHT);
+        this.gameState.performMove(Direction.DOWN);
         
-        assertEquals(2, this.gameState.getGameLog().getMessages().size());
+        assertEquals(1, this.gameState.getGameLog().getMessages().size());
     }
+    
 }

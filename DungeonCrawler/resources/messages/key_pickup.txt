@@ -1,14 +1,8 @@
-# This is a comment
-# This is a comment as well
-# These are all comments
-# and
-# they
-# shouldn't
-# show
-# up
-# in-game!
+# 
 You picked up a <b style="color: yellow;">golden key</b>!
 You are now in possession of a <b style="color: yellow;">golden key</b>!
 You found a shiny <b style="color: yellow;">golden key</b>!
 You now hold a fancy <b style="color: yellow;">golden key</b>!
 You now have a <b style="color: yellow;">golden key</b>!
+You pick up the <b style="color: yellow;">fancy looking MacGuffin</b> and put it in your pocket.
+You pick up the golden, although otherwise useless <b style="color: yellow;">key</b>.
