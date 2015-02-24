@@ -41,3 +41,10 @@
 - Skeletons now attack the player
 - Implemented lose and win states
 - Added more tests
+
+17.02.2015
+12:00-18:00
+===
+- Finished map generator
+- Made game winnable and losable
+- Added more tests

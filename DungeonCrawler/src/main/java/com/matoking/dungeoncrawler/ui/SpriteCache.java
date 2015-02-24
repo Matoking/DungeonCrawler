@@ -1,7 +1,7 @@
 package com.matoking.dungeoncrawler.ui;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -39,7 +39,8 @@ public class SpriteCache {
                 
                 this.sprites.put(imageName, image);
             } catch (Exception e) {
-                return null;
+                // If image couldn't be loaded, load the generated error image instead
+                return this.getErrorImage();
             }
             
             return this.sprites.get(imageName);
@@ -57,10 +58,6 @@ public class SpriteCache {
     public BufferedImage getResizedImage(String imageName, int factor) {
         BufferedImage image = this.getImage(imageName);
         
-        if (image == null) {
-            return null;
-        }
-        
         BufferedImage resized = new BufferedImage(image.getWidth()*factor, image.getHeight()*factor, BufferedImage.TYPE_INT_ARGB);
         
         Graphics g = resized.getGraphics();
@@ -68,5 +65,26 @@ public class SpriteCache {
         g.dispose();
         
         return resized;
+    }
+    
+    /**
+     * Returns a generated image to be used in case of an error
+     * (eg. the actual image file can't be loaded)
+     * 
+     * @return Image as a BufferedImage
+     */
+    public BufferedImage getErrorImage() {
+        BufferedImage errorImage = new BufferedImage(Sprite.TILE_WIDTH, Sprite.TILE_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        
+        Graphics g = errorImage.getGraphics();
+        
+        // Draw a red X mark
+        g.setColor(Color.RED);
+        g.drawLine(0, 0, Sprite.TILE_WIDTH, Sprite.TILE_HEIGHT);
+        g.drawLine(0, Sprite.TILE_HEIGHT, Sprite.TILE_WIDTH, 0);
+        
+        g.dispose();
+        
+        return errorImage;
     }
 }

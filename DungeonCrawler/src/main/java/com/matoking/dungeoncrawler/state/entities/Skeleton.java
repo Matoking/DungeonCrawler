@@ -172,8 +172,6 @@ public class Skeleton implements Entity {
         int playerX = this.gameState.getPlayer().getX();
         int playerY = this.gameState.getPlayer().getY();
         
-        GameMap gameMap = this.gameState.getGameMap();
-        
         // First, check if player's coordinates are outside the enemy's possible area of view
         // If so, return false immediately
         if (playerX < this.getX() - (ENEMY_AREA_RADIUS / 2) || playerX > this.getX() + (ENEMY_AREA_RADIUS / 2) ||

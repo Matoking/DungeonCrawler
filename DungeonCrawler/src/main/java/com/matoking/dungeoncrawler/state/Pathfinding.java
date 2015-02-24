@@ -198,7 +198,7 @@ public class Pathfinding {
             coordinate = nodesToTarget.poll();
         }
         
-        if (coordinate != null) {
+        if (coordinate != null && this.stepsToGoal != -1) {
             this.nextStepToGoal = coordinate;
         } else {
             this.nextStepToGoal = null;
